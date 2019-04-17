@@ -1,1 +1,5 @@
-# CS 100 Programming Project
+# CS 100 RShell
+## Abdullah Majmundar - 861233763
+## Emily Dixon - 
+
+

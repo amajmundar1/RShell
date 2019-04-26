@@ -11,7 +11,7 @@ program will be able to print a command prompt as well as read in and then execu
 
 # Diagram:
 
-![UML Diagram](image url)
+![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram.png)
 
 # Classes:
 

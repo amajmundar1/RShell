@@ -1,6 +1,6 @@
 # CS 100 RShell
-Winter 2019
-Abdullah Majmundar - 861233763
+Winter 2019  
+Abdullah Majmundar - 861233763  
 Emily Dixon - 862051249
 
 # Introduction:
@@ -24,15 +24,15 @@ execvp will be used to run the commands, while fork will be used to run those mu
 2. Parser unit testing
 3. Base
 4. Command
-    4a. evaluate()
+  4. evaluate()
 5. single command integration testing
 6. Operator class
 7. Add
-    7a. evaluate()
+  7. evaluate()
 8. Or
-    8a. evaluate()
+  8. evaluate()
 9. Semi
-    9a. evaluate()
+  9. evaluate()
 10. Operator unit testing
 11. multiple command integration testing
 

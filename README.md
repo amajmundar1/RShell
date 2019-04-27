@@ -1,13 +1,12 @@
 # CS 100 RShell
 Winter 2019
-## Abdullah Majmundar - 861233763
-## Emily Dixon - 862051249
+Abdullah Majmundar - 861233763
+Emily Dixon - 862051249
 
 # Introduction:
 
-program will be able to print a command prompt as well as read in and then execute a line of commands.
-- [ ] design patterns used:
-- [ ] overview of inputs
+program will be able to print a command prompt as well as read in and then execute a line of commands. Parser will separate input into commands and connectors, which will then be processed and executed by their respective classes.
+
 
 # Diagram:
 
@@ -15,16 +14,25 @@ program will be able to print a command prompt as well as read in and then execu
 
 # Classes:
 
-# Prototypes:
+# Prototypes/Research:
 
-```c++
-code
-```
-
-- [ ] descibe findings
-- [ ] questions/results
+execvp will be used to run the commands, while fork will be used to run those multiple processes simultaneously. waitpid will put processes on hold to ensure they follow the guidelines of the connectors.
 
 # Roadmap:
 
-1. ordered list of necessary development tasks
+1. Parser
+2. Parser unit testing
+3. Base
+4. Command
+    4a. evaluate()
+5. single command integration testing
+6. Operator class
+7. Add
+    7a. evaluate()
+8. Or
+    8a. evaluate()
+9. Semi
+    9a. evaluate()
+10. Operator unit testing
+11. multiple command integration testing
 

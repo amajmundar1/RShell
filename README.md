@@ -111,11 +111,17 @@ The vector will then be fed into the Evaluate class where the first string will 
 
 # Prototypes/Research:
 
-execvp will be used to run the commands, while fork will be used to run those multiple processes simultaneously. waitpid will put processes on hold to ensure they follow the guidelines of the connectors.
+1. execvp will be used to run the commands 
+2. fork will be used to run those multiple processes simultaneously
+3. waitpid will put processes on hold to ensure they follow the guidelines of the connectors
+4. The guidelines for the connectors are as follows:
+	a. And (&&): Will execute Command 2 IF Command 1 is successful
+	b. Or (||): Will execute command 2 IF Command 1 is unsuccessful
+	c. Semi (;) Will execute Command 1 AND Command 2 regardless of either's success 
 
 # Development and Testing Roadmap:
 
-1. Parser#1
+1. Parser
 2. Parser unit testing
 3. Base
 4. Command

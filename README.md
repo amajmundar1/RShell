@@ -115,7 +115,7 @@ execvp will be used to run the commands, while fork will be used to run those mu
 
 # Development and Testing Roadmap:
 
-1. Parser
+1. Parser#1
 2. Parser unit testing
 3. Base
 4. Command

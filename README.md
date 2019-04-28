@@ -5,13 +5,13 @@ Emily Dixon - 862051249
 
 # Introduction:
 
-The goal of this program is to replicate the functionality of an RSHELL to a limited extent. It will be able to execute basic commands and use the "&&", "||" and ";" operators.
+The goal of this program is to replicate the functionality of an RSHELL to a limited extent. It will be able to execute basic commands and use the "&&", "||", and ";" operators.
 
-The input will be read as a string and then tokenized based on operators first. It will be fitted into an expression tree and evaluated according to the rules described in the Add, Or and Semi classes.
+The input will be read as a string and then tokenized based on operators first. It will be fitted into an expression tree and evaluated according to the rules described in the Add, Or, and Semi classes.
 
 The evaluation process will call Parser once again and this time tokenize based on white space (Seperating words)
 
-The vector will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check the rest of the string matches the syntax of the command. Then it will execute. if it does not, it will return an error message based on where it fails.
+The vecor will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check that the rest of the string matches the syntax of the command. Then it will execute. If it does not, it will return an error message based on where it fails.
 
 # Diagram:
 
@@ -33,7 +33,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 2. Base
-   - Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
+   - Will serve as an abstract base class for all functionality. The idea is to create an expression tree with the operators ADD, OR, and SEMI
 	``` C++
 	class Base
 	{
@@ -42,7 +42,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 3. Command
-   - Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
+   - Will take in a vector of strings and compare the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exists"
 	``` C++
 	class Commands
 	{
@@ -54,7 +54,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 4. Operator
-   - Will have three children classes: ADD, OR and SEMI
+   - Will have three children classes: ADD, OR, and SEMI
 	``` C++
 	class Operator
 	{

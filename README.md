@@ -20,7 +20,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 # Classes:
 
 1. Parser
-	Will take in a string and a tokenizer. It will return a vector of strings.
+   - Will take in a string and a tokenizer. It will return a vector of strings.
 	``` C++
 	class Parser
 	{
@@ -33,7 +33,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 2. Base
-	Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
+   - Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
 	``` C++
 	class Base
 	{
@@ -42,7 +42,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 3. Command
-	Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
+   - Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
 	``` C++
 	class Commands
 	{
@@ -54,7 +54,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 4. Operator
-	Will have three children classes: ADD, OR and SEMI
+   - Will have three children classes: ADD, OR and SEMI
 	``` C++
 	class Operator
 	{
@@ -66,7 +66,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 5. Add
-	Will execute Command 2 if Command 1 executes properly
+   - Will execute Command 2 if Command 1 executes properly
 	``` C++
 	class Add
 	{
@@ -80,7 +80,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 6. Or
-	Will execute Command 2 if Command 1 fails
+   - Will execute Command 2 if Command 1 fails
 	``` C++
 	class Or
 	{
@@ -94,7 +94,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 7. Semi
-	Will execute Command 1 and Command 2, regardless of success or failiure
+   - Will execute Command 1 and Command 2, regardless of success or failiure
 	``` C++
 	class Semi
 	{

@@ -5,12 +5,17 @@ Emily Dixon - 862051249
 
 # Introduction:
 
-program will be able to print a command prompt as well as read in and then execute a line of commands. Parser will separate input into commands and connectors, which will then be processed and executed by their respective classes.
+The goal of this program is to replicate the functionality of an RSHELL to a limited extent. It will be able to execute basic commands and use the "&&", "||" and ";" operators.
 
+The input will be read as a string and then tokenized based on operators first. It will be fitted into an expression tree and evaluated according to the rules described in the Add, Or and Semi classes.
+
+The evaluation process will call Parser once again and this time tokenize based on white space (Seperating words)
+
+The vector will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check the rest of the string matches the syntax of the command. Then it will execute. if it does not, it will return an error message based on where it fails.
 
 # Diagram:
 
-![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram.png)
+![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram1.png)
 
 # Classes:
 

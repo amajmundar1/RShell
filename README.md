@@ -14,6 +14,96 @@ program will be able to print a command prompt as well as read in and then execu
 
 # Classes:
 
+1. Parser
+	Will take in a striong and a tokenizer. It will return a vector of strings.
+	``` C++
+	class Parser
+	{
+	private:
+		string Input;
+		string Tokenizer;
+	public:
+		Parser(string input, string tokenizer);
+		vector <string> parse();
+	}
+	```
+2. Base
+	Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
+	``` C++
+	class Base
+	{
+	public:
+		virtual string evaluate() = 0;
+	}
+	```
+3. Command
+	Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
+	``` C++
+	class Commands
+	{
+	private:
+		vector<string> input;
+	public:
+		Commands(vector<sting> input);
+		string evaluate();
+	}
+	```
+4. Operator
+	Will have three children classes: ADD, OR and SEMI
+	``` C++
+	class Operator
+	{
+	private:
+		string OpString;
+	public:
+		Operator(string input);
+		string evaluate();
+	}
+	```
+5. Add
+	Will execute Command 2 if Command 1 executes properly
+	``` C++
+	class Add
+	{
+	private:
+		Base* command1;
+		Base* command2;
+	public:
+		Add();
+		Add(Base* CMD1, Base* CMD2);
+		string evaluate();
+	}
+	```
+6. Or
+	Will execute Command 2 if Command 1 fails
+	``` C++
+	class Or
+	{
+	private:
+		Base* command1;
+		Base* command2;
+	public:
+		Or();
+		Or(Base* CMD1, Base* CMD2);
+		string evaluate();
+	}
+	```
+7. Semi
+	Will execute Command 1 and Command 2, regardless of success or failiure
+	``` C++
+	class Semi
+	{
+	private:
+		Base* command1;
+		Base* command2;
+	public:
+		Semi();
+		Semi(Base* CMD1, Base* CMD2);
+		string evaluate();
+	}
+	```
+
+
 # Prototypes/Research:
 
 execvp will be used to run the commands, while fork will be used to run those multiple processes simultaneously. waitpid will put processes on hold to ensure they follow the guidelines of the connectors.

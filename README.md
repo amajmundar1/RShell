@@ -24,15 +24,15 @@ execvp will be used to run the commands, while fork will be used to run those mu
 2. Parser unit testing
 3. Base
 4. Command
-  4. evaluate()
+    4. evaluate()
 5. single command integration testing
 6. Operator class
 7. Add
-  7. evaluate()
+    7. evaluate()
 8. Or
-  8. evaluate()
+    8. evaluate()
 9. Semi
-  9. evaluate()
+    9. evaluate()
 10. Operator unit testing
 11. multiple command integration testing
 

@@ -20,7 +20,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 # Classes:
 
 1. Parser
-	Will take in a striong and a tokenizer. It will return a vector of strings.
+   - Will take in a string and a tokenizer. It will return a vector of strings.
 	``` C++
 	class Parser
 	{
@@ -33,7 +33,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 2. Base
-	Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
+   - Will serve as an abstract base class for all functionality. The idea is to create and expression tree with the operators ADD, OR and SEMI
 	``` C++
 	class Base
 	{
@@ -42,7 +42,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 3. Command
-	Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
+   - Will take in a vector of strings and comapre the first string to a list of predefined functions. If it exists, then it executes, if not it returns "No Such Command Exisits"
 	``` C++
 	class Commands
 	{
@@ -54,7 +54,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 4. Operator
-	Will have three children classes: ADD, OR and SEMI
+   - Will have three children classes: ADD, OR and SEMI
 	``` C++
 	class Operator
 	{
@@ -66,7 +66,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 5. Add
-	Will execute Command 2 if Command 1 executes properly
+   - Will execute Command 2 if Command 1 executes properly
 	``` C++
 	class Add
 	{
@@ -80,7 +80,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 6. Or
-	Will execute Command 2 if Command 1 fails
+   - Will execute Command 2 if Command 1 fails
 	``` C++
 	class Or
 	{
@@ -94,7 +94,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 7. Semi
-	Will execute Command 1 and Command 2, regardless of success or failiure
+   - Will execute Command 1 and Command 2, regardless of success or failiure
 	``` C++
 	class Semi
 	{
@@ -111,20 +111,25 @@ The vector will then be fed into the Evaluate class where the first string will 
 
 # Prototypes/Research:
 
-execvp will be used to run the commands, while fork will be used to run those multiple processes simultaneously. waitpid will put processes on hold to ensure they follow the guidelines of the connectors.
+1. execvp will be used to run the commands 
+2. fork will be used to run those multiple processes simultaneously
+3. waitpid will put processes on hold to ensure they follow the guidelines of the connectors
+4. The guidelines for the connectors are as follows:
+   - And (&&): Will execute Command 2 IF Command 1 is successful
+   - Or (||): Will execute command 2 IF Command 1 is unsuccessful
+   - Semi (;) Will execute Command 1 AND Command 2 regardless of either's success 
 
 # Development and Testing Roadmap:
 
-1. [Parser](#1)
-2. [Parser unit testing](#2)
-3. [Base](#3)
-4. [Command](#4)
-5. [Command: evaluate()](#5)
-6. [single command integration testing](#6)
-7. [Operator class](#7)
-8. [Add: evaluate()](#8)
-9. [Or: evaluate()](#9)
-10. [Semi: evaluate()](#10)
-11. [Operator unit testing](#11)
+1. [Parser](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/1)
+2. [Parser unit testing](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/2)
+3. [Base](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/3)
+4. [Command](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/4)
+5. [Command: evaluate()](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/5)
+6. [single command integration testing](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/6)
+7. [Operator class](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/7)
+8. [Add: evaluate()](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/8)
+9. [Or: evaluate()](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/9)
+10. [Semi: evaluate()](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/10)
+11. [Operator unit testing](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/11)
 12. [multiple command integration testing](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/issues/12)
-

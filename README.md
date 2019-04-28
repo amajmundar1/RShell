@@ -20,7 +20,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 # Classes:
 
 1. Parser
-	Will take in a striong and a tokenizer. It will return a vector of strings.
+	Will take in a string and a tokenizer. It will return a vector of strings.
 	``` C++
 	class Parser
 	{

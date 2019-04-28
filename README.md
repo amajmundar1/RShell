@@ -18,7 +18,7 @@ program will be able to print a command prompt as well as read in and then execu
 
 execvp will be used to run the commands, while fork will be used to run those multiple processes simultaneously. waitpid will put processes on hold to ensure they follow the guidelines of the connectors.
 
-# Roadmap:
+# Development and Testing Roadmap:
 
 1. Parser
 2. Parser unit testing

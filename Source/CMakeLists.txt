@@ -4,4 +4,5 @@ SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(project
    	main.cpp
+	Parser.cpp
 )

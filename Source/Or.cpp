@@ -8,8 +8,9 @@ string Or::evaluate() {
 	int status;
 
 	if (pid == 0) {
-		Parse or1 = new Parse(Left, " ");
-		execvp(or1.parsed[0], or1.parsed);
+		Parser or2 = new Parser(Left);
+		vector<char*> or1 = or2.Parse();
+		execvp(or1[0], or1);
 		perror("child failed");
 	}
 	else if (pid > 0) {
@@ -20,8 +21,9 @@ string Or::evaluate() {
 		}
 		else {
 			if(!WIFEXITED(status){
-				Parse or1 = new Parse(Right, " ");
-				execvp(or1.parsed[0], or1.parsed);
+				Parser or2 = new Parser(Right);
+				vector<char*> or1 = or2.Parse();
+				execvp(or1, or1);
 				perror("parent failed");
 				exit(-1);
 			}

@@ -5,16 +5,17 @@ using namespace std;
 string Semi::evaluate() {
         pid_t pid, x;
         pid = fork();
-        int status;
 
         if (pid == 0) {
-                Parse semi = new Parse(Left, " ");
-                execvp(semi.parsed[0], semi.parsed);
+                Parser semi1 = new Parser(Left);
+                vector<char*> semi = or1.Parse();
+		execvp(semi[0], semi);
                 perror("child failed");
         }
         else if (pid > 0) {
-                Parse semi = new Parse(Right, " ");
-                execvp(semi.parsed[0], semi.parsed);
+                Parser semi1 = new Parser(Right);
+		vector<char*> semi = semi1.Parse();
+                execvp(semi[0], semi);
                 perror("parent failed");
         }
         else {

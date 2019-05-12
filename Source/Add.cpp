@@ -8,8 +8,9 @@ string Add::evaluate() {
         int status;
 
         if (pid == 0) {
-                Parse add = new Parse(Left, " ");
-                execvp(add.parsed[0], add.parsed);
+                Parser add1 = new Parser(Left);
+		vector<char*> add = add1.Parse();
+                execvp(add[0], add);
                 perror("child failed");
         }
         else if (pid > 0) {
@@ -20,8 +21,9 @@ string Add::evaluate() {
                 }
                 else {
                         if(WIFEXITED(status){
-                                Parse add = new Parse(Right, " ");
-                                execvp(add.parsed[0], add.parsed);
+                                Parser add1 = new Parser(Right);
+                                vector<char*> add = add1.Parse();
+				execvp(add[0], add);
                                 perror("parent failed");
                         }
                 }

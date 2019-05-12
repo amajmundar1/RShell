@@ -1,6 +1,19 @@
-#include "Or.h"
+#include "../header/Or.h"
+#include "Parser.h"
 
 using namespace std;
+
+Or::Or()
+{
+	Left = NULL;
+	Right = NULL;
+}
+
+Or::Or(Base* left, Base* right)
+{
+	Left = left;
+	Right = right;
+}
 
 string Or::evaluate() {
 	pid_t pid, x;
@@ -8,7 +21,7 @@ string Or::evaluate() {
 	int status;
 
 	if (pid == 0) {
-		Parser or2 = new Parser(Left);
+		Parser or2 = new Parser((char*)(Left->evaluate()).c_str());
 		vector<char*> or1 = or2.Parse();
 		execvp(or1[0], or1);
 		perror("child failed");
@@ -21,7 +34,7 @@ string Or::evaluate() {
 		}
 		else {
 			if(!WIFEXITED(status){
-				Parser or2 = new Parser(Right);
+				Parser or2 = new Parser((char*)(Right->evaluate()).c_str());
 				vector<char*> or1 = or2.Parse();
 				execvp(or1, or1);
 				perror("parent failed");

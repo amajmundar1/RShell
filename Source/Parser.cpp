@@ -1,14 +1,14 @@
 #include "Parser.h"
 #include <bits/stdc++.h>
 
-Parser::Parser(char *input)
+Parser::Parser(string input)
 {
-	Input = input;
+	Input = (char*)input.c_str();
+	Parse();
 }
 
-vector<char*> Parser::Parse()
+void Parser::Parse()
 {
-	vector<char*> tokens;
 	char temp[999];
 	temp[0] = '\0';
 	for(int i = 0; Input[i] != '\0'; i++)
@@ -18,7 +18,7 @@ vector<char*> Parser::Parse()
 			case ' ':
 				{
 					if (strlen(temp) > 0)
-			       			tokens.push_back(strdup(temp));
+			       			Tokens.push_back(strdup(temp));
 					cout << temp << endl;
 					temp[0] = '\0';
 				}
@@ -36,6 +36,42 @@ vector<char*> Parser::Parse()
 					}
 				}
 				break;
+			case ';':
+				{
+					if (strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					Tokens.push_back(strdup(&Input[i]));
+					temp[0] = '\0';
+				}
+				break;
+			case '&':
+				{
+					if(Input[i+1] == '&')
+					{
+						if(strlen(temp) > 0)
+							Tokens.push_back(strdup(temp));
+						Tokens.push_back(strdup(&Input[i]));
+						temp[0] = '\0';
+						i++;
+					}
+					else
+						strncat(temp, &Input[i], 1);
+				}
+				break;
+			case '|':
+				{
+					if(Input[i+1] == '|')
+					{
+						if (strlen(temp) > 0)
+							Tokens.push_back(strdup(temp));
+						Tokens.push_back(strdup(&Input[i]));
+						temp[0] = '\0';
+						i++;
+					}
+					else
+						strncat(temp, &Input[i], 1);
+				}
+				break;
 			default:
 				{
 					strncat(temp, &Input[i], 1);
@@ -43,5 +79,12 @@ vector<char*> Parser::Parse()
 				break;
 		}
 	}
-	return tokens;
+}
+
+char* Parser::getParse()
+{
+	char* Output[Tokens.size()];
+	for(int i = 0; i < Tokens.size(); i++)
+		Output[i] = Tokens[i];
+	return Output;
 }

@@ -123,6 +123,60 @@ project/fast:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
 
+Add.o: Add.cpp.o
+
+.PHONY : Add.o
+
+# target to build an object file
+Add.cpp.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Add.cpp.o
+.PHONY : Add.cpp.o
+
+Add.i: Add.cpp.i
+
+.PHONY : Add.i
+
+# target to preprocess a source file
+Add.cpp.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Add.cpp.i
+.PHONY : Add.cpp.i
+
+Add.s: Add.cpp.s
+
+.PHONY : Add.s
+
+# target to generate assembly for a file
+Add.cpp.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Add.cpp.s
+.PHONY : Add.cpp.s
+
+Or.o: Or.cpp.o
+
+.PHONY : Or.o
+
+# target to build an object file
+Or.cpp.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Or.cpp.o
+.PHONY : Or.cpp.o
+
+Or.i: Or.cpp.i
+
+.PHONY : Or.i
+
+# target to preprocess a source file
+Or.cpp.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Or.cpp.i
+.PHONY : Or.cpp.i
+
+Or.s: Or.cpp.s
+
+.PHONY : Or.s
+
+# target to generate assembly for a file
+Or.cpp.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Or.cpp.s
+.PHONY : Or.cpp.s
+
 Parser.o: Parser.cpp.o
 
 .PHONY : Parser.o
@@ -149,6 +203,33 @@ Parser.s: Parser.cpp.s
 Parser.cpp.s:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Parser.cpp.s
 .PHONY : Parser.cpp.s
+
+Semi.o: Semi.cpp.o
+
+.PHONY : Semi.o
+
+# target to build an object file
+Semi.cpp.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Semi.cpp.o
+.PHONY : Semi.cpp.o
+
+Semi.i: Semi.cpp.i
+
+.PHONY : Semi.i
+
+# target to preprocess a source file
+Semi.cpp.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Semi.cpp.i
+.PHONY : Semi.cpp.i
+
+Semi.s: Semi.cpp.s
+
+.PHONY : Semi.s
+
+# target to generate assembly for a file
+Semi.cpp.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/Semi.cpp.s
+.PHONY : Semi.cpp.s
 
 main.o: main.cpp.o
 
@@ -186,9 +267,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... project"
 	@echo "... rebuild_cache"
+	@echo "... Add.o"
+	@echo "... Add.i"
+	@echo "... Add.s"
+	@echo "... Or.o"
+	@echo "... Or.i"
+	@echo "... Or.s"
 	@echo "... Parser.o"
 	@echo "... Parser.i"
 	@echo "... Parser.s"
+	@echo "... Semi.o"
+	@echo "... Semi.i"
+	@echo "... Semi.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

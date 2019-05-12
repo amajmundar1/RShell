@@ -6,6 +6,7 @@ private:
         Base* Left;
         Base* Right;
 public:
-        Operator(Left, Right): Left(Left), Right(Right) {};
+	Operator(): Left(NULL), Right(NULL) {};
+        Operator(Base* left, Base* right): Left(left), Right(right) {};
         virtual string evaluate() = 0;
-}
+};

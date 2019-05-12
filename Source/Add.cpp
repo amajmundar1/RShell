@@ -1,6 +1,19 @@
-#include "Add.h"
+#include "../header/Add.h"
+#include "Parser.h"
 
 using namespace std;
+
+Add::Add()
+{
+	Left = NULL;
+	Right = NULL;
+}
+
+Add::Add(Base* left, Base* right)
+{
+	Left = left;
+	Right = right;
+}
 
 string Add::evaluate() {
         pid_t pid, x;
@@ -8,8 +21,8 @@ string Add::evaluate() {
         int status;
 
         if (pid == 0) {
-                Parser add1 = new Parser(Left);
-		vector<char*> add = add1.Parse();
+                Parser* add1 = new Parser(Left->evaluate());
+		vector<char*> add = add1->Parse();
                 execvp(add[0], add);
                 perror("child failed");
         }
@@ -21,8 +34,8 @@ string Add::evaluate() {
                 }
                 else {
                         if(WIFEXITED(status){
-                                Parser add1 = new Parser(Right);
-                                vector<char*> add = add1.Parse();
+                                Parser* add1 = new Parser(Right->evaluate());
+                                vector<char*> add = add1->Parse();
 				execvp(add[0], add);
                                 perror("parent failed");
                         }

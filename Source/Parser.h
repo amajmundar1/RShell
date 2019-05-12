@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include <vector>
 
 using namespace std;
@@ -8,8 +9,9 @@ class Parser
 {
 private:
 	char *Input;
-	char Delim;
+	vector<char*> Tokens;
 public:
-	Parser(char *input);
-	vector<char*> Parse();
+	Parser(string input);
+	void Parse();
+	char* getParse();
 };

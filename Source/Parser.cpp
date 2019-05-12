@@ -10,15 +10,17 @@ vector<char*> Parser::Parse()
 {
 	vector<char*> tokens;
 	char temp[999];
-	char* t;
-	int i = 0;
-	for(t = Input; *t != '\0'; t++)
+	temp[0] = '\0';
+	for(int i = 0; Input[i] != '\0'; i++)
 	{
-		switch(t[i])
+		switch(Input[i])
 		{
 			case ' ':
 				{
-			       		tokens.push_back(temp);
+					if (strlen(temp) > 0)
+			       			tokens.push_back(strdup(temp));
+					cout << temp << endl;
+					temp[0] = '\0';
 				}
 				break;
 			case '"':
@@ -27,20 +29,19 @@ vector<char*> Parser::Parse()
 					while (found != true)
 					{
 						i += 1;
-						if (t[i] == '"')
+						if (Input[i] == '"')
 							found = true;
 						else
-							strncat(temp, &t[i], 1);
+							strncat(temp, &Input[i], 1);
 					}
 				}
 				break;
 			default:
 				{
-					strncat(temp, &t[i], 1);
+					strncat(temp, &Input[i], 1);
 				}
 				break;
 		}
-		i += 1;
 	}
 	return tokens;
 }

@@ -81,10 +81,18 @@ void Parser::Parse()
 	}
 }
 
-char* Parser::getParse()
+char** Parser::getParse()
 {
-	char* Output[Tokens.size()];
+	char ** Output = new char* [Tokens.size()];
 	for(int i = 0; i < Tokens.size(); i++)
 		Output[i] = Tokens[i];
+	//Output[Token.size()+1] = '\0';
+	//const char* file = Tokens[0];
+	//return make_tuple(file, Output);
 	return Output;
+}
+
+int Parser::getSize()
+{
+	return Tokens.size();
 }

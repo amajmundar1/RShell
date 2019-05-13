@@ -20,14 +20,14 @@ string Semi::evaluate() {
         pid = fork();
 
         if (pid == 0) {
-                Parser semi1 = new Parser((char*)(Left->evaluate()).c_str());
-                vector<char*> semi = or1.Parse();
+                Parser* semi1 = new Parser(Left->evaluate());
+                char** semi = semi1->getParse();
 		execvp(semi[0], semi);
                 perror("child failed");
         }
         else if (pid > 0) {
-                Parser semi1 = new Parser((char*)(Right->evaluate()).c_str());
-		vector<char*> semi = semi1.Parse();
+                Parser* semi1 = new Parser(Right->evaluate());
+		char** semi = semi1->getParse();
                 execvp(semi[0], semi);
                 perror("parent failed");
         }

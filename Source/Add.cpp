@@ -22,7 +22,7 @@ string Add::evaluate() {
 
         if (pid == 0) {
                 Parser* add1 = new Parser(Left->evaluate());
-		vector<char*> add = add1->Parse();
+		char** add = add1->getParse();
                 execvp(add[0], add);
                 perror("child failed");
         }
@@ -33,9 +33,9 @@ string Add::evaluate() {
                         exit(-1);
                 }
                 else {
-                        if(WIFEXITED(status){
+                        if(WIFEXITED(status)){
                                 Parser* add1 = new Parser(Right->evaluate());
-                                vector<char*> add = add1->Parse();
+                                char** add = add1->getParse();
 				execvp(add[0], add);
                                 perror("parent failed");
                         }

@@ -21,8 +21,8 @@ string Or::evaluate() {
 	int status;
 
 	if (pid == 0) {
-		Parser or2 = new Parser((char*)(Left->evaluate()).c_str());
-		vector<char*> or1 = or2.Parse();
+		Parser* or2 = new Parser(Left->evaluate());
+		char** or1 = or2->getParse();
 		execvp(or1[0], or1);
 		perror("child failed");
 	}
@@ -33,10 +33,10 @@ string Or::evaluate() {
 			exit(-1);
 		}
 		else {
-			if(!WIFEXITED(status){
-				Parser or2 = new Parser((char*)(Right->evaluate()).c_str());
-				vector<char*> or1 = or2.Parse();
-				execvp(or1, or1);
+			if(!WIFEXITED(status)){
+				Parser* or2 = new Parser(Right->evaluate());
+				char** or1 = or2->getParse();
+				execvp(or1[0], or1);
 				perror("parent failed");
 				exit(-1);
 			}

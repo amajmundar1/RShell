@@ -5,5 +5,5 @@ using namespace std;
 
 class Base {
 public:
-	virtual string evaluate() = 0;
+	virtual bool evaluate() = 0;
 };

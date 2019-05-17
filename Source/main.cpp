@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
 	bool exit = false;
-	string input;
+	string input = " ";
 	while (exit != true)
 	{
 		cout << "$ ";
@@ -20,8 +20,10 @@ int main()
 		else 
 		{
 			Parser* pars = new Parser(input);
-			char** Param = pars->getParse();
-			execvp(Param[0], Param);
+			vector<char*> Param = pars->Parse();
+			for(int i = 0; i < Param.size(); ++i)
+				cout << Param[i] << endl;
+			execvp(Param[0], Param.data());
 		}
 
 	}

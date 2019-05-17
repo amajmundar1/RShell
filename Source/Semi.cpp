@@ -3,19 +3,8 @@
 
 using namespace std;
 
-Semi::Semi()
-{
-	Left = NULL;
-	Right = NULL;
-}
-
-Semi::Semi(Base* left, Base* right)
-{
-	Left = left;
-	Right = right;
-}
-
-string Semi::evaluate() {
+bool Semi::evaluate() {
+	/*
         pid_t pid, x;
         pid = fork();
 
@@ -37,5 +26,11 @@ string Semi::evaluate() {
         }
         exit(1);
         return 0;
+	*/
+	if (Left != nullptr)
+		Left->evaluate();
+	if (Right != nullptr)
+		return Right->evaluate();
+	return false;
 }
 

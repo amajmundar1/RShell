@@ -3,19 +3,8 @@
 
 using namespace std;
 
-Or::Or()
-{
-	Left = NULL;
-	Right = NULL;
-}
-
-Or::Or(Base* left, Base* right)
-{
-	Left = left;
-	Right = right;
-}
-
-string Or::evaluate() {
+bool Or::evaluate() {
+	/*
 	pid_t pid, x;
 	pid = fork();
 	int status;
@@ -48,4 +37,16 @@ string Or::evaluate() {
 	}
 	exit(1);
 	return 0;
+	*/
+	bool output = false;
+	if(Left != nullptr)
+		output = Left->evaluate();
+	if(Right != nullptr)
+	{
+		if(output)
+			output = true;
+		else
+			output = Right->evaluate();
+	}
+	return output;
 }

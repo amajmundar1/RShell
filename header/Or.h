@@ -2,11 +2,8 @@
 #include "Operator.h"
 
 class Or: public Operator {
-	private:
-		Base* Left;
-		Base* Right;
 	public:
 		Or();
-		Or(Base* left, Base* right);
-		string evaluate();
+		Or(Base* left, Base* right) : Operator(left, right) {};
+		bool evaluate();
 };

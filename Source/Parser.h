@@ -12,10 +12,7 @@ class Parser
 {
 private:
 	char *Input;
-	vector<char*> Tokens;
 public:
 	Parser(string input);
-	void Parse();
-	char** getParse();
-	int getSize();
+	vector<char*> Parse();
 };

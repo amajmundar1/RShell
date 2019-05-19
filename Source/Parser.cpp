@@ -1,4 +1,4 @@
-#include "Parser.h"
+#include "../header/Parser.h"
 #include <bits/stdc++.h>
 
 Parser::Parser(string input)
@@ -23,6 +23,17 @@ vector<char*> Parser::Parse()
 				}
 				break;
 			case '"':
+				{
+					int j = i+1;
+					while (Input[j] != '"')
+					{
+						strncat(temp, &Input[j], 1);
+						j++;
+					}
+					Tokens.push_back(strdup(temp));
+					temp[0] = '\0';
+					i = j++;
+				}
 				break;
 			case ';':
 				{

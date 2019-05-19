@@ -1,5 +1,5 @@
 #include "../header/Add.h"
-#include "Parser.h"
+//#include "Parser.h"
 
 using namespace std;
 
@@ -36,7 +36,7 @@ bool Add::evaluate() {
         }
         exit(1);
         return 0;
-	*/
+	
 	if (Left == nullptr && right == nullptr)
 		return false;
 	if (Left == nullptr)
@@ -46,6 +46,7 @@ bool Add::evaluate() {
 		Left->evaluate();
 		return false;
 	}
+	*/
 	if (Left->evaluate())
 		return Right->evaluate();
 	else

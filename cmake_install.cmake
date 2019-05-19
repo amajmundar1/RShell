@@ -1,4 +1,4 @@
-# Install script for directory: /home/amajm/CS100Project/spring-2019-assignment-cs100-abdullah-emily/Source
+# Install script for directory: /home/amajm/CS100Project/spring-2019-assignment-cs100-abdullah-emily
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/amajm/CS100Project/spring-2019-assignment-cs100-abdullah-emily/Source/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/amajm/CS100Project/spring-2019-assignment-cs100-abdullah-emily/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

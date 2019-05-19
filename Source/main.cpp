@@ -3,7 +3,8 @@
 #include <tuple>
 #include <vector>
 #include <unistd.h>
-#include "Parser.h"
+#include "../header/Parser.h"
+#include "../header/Command.h"
 
 using namespace std;
 

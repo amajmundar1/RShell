@@ -1,5 +1,5 @@
 #include "../header/Or.h"
-#include "Parser.h"
+//#include "Parser.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "../headers/Command.h"
+#include "../header/Command.h"
 
 Command::Command(vector<char*> input)
 {
@@ -11,7 +11,7 @@ Command::Command(vector<char*> input)
 	}
 }
 
-bool Command::execute()
+bool Command::evaluate()
 {
 	if (empty == true)
 		return false;

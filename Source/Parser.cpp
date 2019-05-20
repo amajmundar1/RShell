@@ -6,6 +6,80 @@ Parser::Parser(string input)
 	Input = (char*)input.c_str();
 }
 
+Parser::Parser(char* input)
+{
+	Input = input;
+}
+
+vector<char*> Parser::Parse1()
+{
+	vector<char*> Tokens;
+	char temp[999];
+	temp[0] = '\0';
+	for(int i = 0; Input[i] != '\0'; i++)
+	{
+		switch(Input[i])
+		{
+			case ';':
+                                {
+                                        if (strlen(temp) > 0)
+                                                Tokens.push_back(strdup(temp));
+                                        Tokens.push_back(strndup(&Input[i], 1));
+                                        temp[0] = '\0';
+                                }
+                                break;
+                        case '&':
+                                {
+                                        if(Input[i+1] == '&')
+                                        {
+                                                if(strlen(temp) > 0)
+                                                        Tokens.push_back(strdup(temp));
+                                                Tokens.push_back(strndup(&Input[i], 2));
+                                                temp[0] = '\0';
+                                                i++;
+                                        }
+                                        else
+                                                strncat(temp, &Input[i], 1);
+                                }
+                                break;
+                        case '|':
+                                {
+                                        if(Input[i+1] == '|')
+                                        {
+                                                if (strlen(temp) > 0)
+                                                        Tokens.push_back(strdup(temp));
+                                                Tokens.push_back(strndup(&Input[i], 2));
+                                                temp[0] = '\0';
+                                                i++;
+                                        }
+                                        else
+                                                strncat(temp, &Input[i], 1);
+                                }
+                                break;
+			default:
+				{
+                                        strncat(temp, &Input[i], 1);
+                                }
+                                break;
+		}
+	}
+	if (strlen(temp) > 0)
+                Tokens.push_back(strdup(temp));
+        for(int i = 0; i < Tokens.size(); ++i)
+        {
+                if ((strcmp(Tokens[i], "&&") == 0) || (strcmp(Tokens[i], "||") == 0) || (strcmp(Tokens[i], ";") == 0))
+		{
+			//char* temp;
+			//temp = **Tokens[i];
+			//**Tokens[i] = **Tokens[i+1];
+			//**Tokens[i+1] = temp;
+			swap(Tokens[i], Tokens[i+1]);
+		}
+        }
+	return Tokens;
+}
+
+
 vector<char*> Parser::Parse()
 {
 	vector<char*> Tokens;
@@ -35,42 +109,6 @@ vector<char*> Parser::Parse()
 					i = j++;
 				}
 				break;
-			case ';':
-				{
-					if (strlen(temp) > 0)
-						Tokens.push_back(strdup(temp));
-					Tokens.push_back(strdup(&Input[i]));
-					temp[0] = '\0';
-				}
-				break;
-			case '&':
-				{
-					if(Input[i+1] == '&')
-					{
-						if(strlen(temp) > 0)
-							Tokens.push_back(strdup(temp));
-						Tokens.push_back(strdup(&Input[i]));
-						temp[0] = '\0';
-						i++;
-					}
-					else
-						strncat(temp, &Input[i], 1);
-				}
-				break;
-			case '|':
-				{
-					if(Input[i+1] == '|')
-					{
-						if (strlen(temp) > 0)
-							Tokens.push_back(strdup(temp));
-						Tokens.push_back(strdup(&Input[i]));
-						temp[0] = '\0';
-						i++;
-					}
-					else
-						strncat(temp, &Input[i], 1);
-				}
-				break;
 			default:
 				{
 					strncat(temp, &Input[i], 1);
@@ -82,5 +120,3 @@ vector<char*> Parser::Parse()
 		Tokens.push_back(strdup(temp));
 	return Tokens;
 }
-
-

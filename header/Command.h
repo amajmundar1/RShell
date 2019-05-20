@@ -1,3 +1,4 @@
+#pragma once
 #include "Base.h"
 #include <unistd.h>
 #include <vector>

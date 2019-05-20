@@ -4,49 +4,10 @@
 using namespace std;
 
 bool Or::evaluate() {
-	/*
-	pid_t pid, x;
-	pid = fork();
-	int status;
-
-	if (pid == 0) {
-		Parser* or2 = new Parser(Left->evaluate());
-		char** or1 = or2->getParse();
-		execvp(or1[0], or1);
-		perror("child failed");
-	}
-	else if (pid > 0) {
-		x = waitpid(-1, &status, 0);
-		if (x == -1) {
-			perror("waitpid error");
-			exit(-1);
-		}
-		else {
-			if(!WIFEXITED(status)){
-				Parser* or2 = new Parser(Right->evaluate());
-				char** or1 = or2->getParse();
-				execvp(or1[0], or1);
-				perror("parent failed");
-				exit(-1);
-			}
-		}
-	}
-	else {
-		perror("fork failed");
-		exit(-1);
-	}
-	exit(1);
-	return 0;
-	*/
-	bool output = false;
-	if(Left != nullptr)
-		output = Left->evaluate();
-	if(Right != nullptr)
-	{
-		if(output)
-			output = true;
-		else
-			output = Right->evaluate();
-	}
-	return output;
+	if (Left->evaluate())
+		return true;
+	else if (Right->evaluate())
+		return true;
+	else
+		return false;
 }

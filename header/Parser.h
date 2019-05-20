@@ -1,10 +1,8 @@
+#pragma once
 #include <iostream>
 #include <string>
-#include <tuple>
-#include <unistd.h>
 #include <vector>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -14,5 +12,7 @@ private:
 	char *Input;
 public:
 	Parser(string input);
+	Parser(char* input);
+	vector<char*> Parse1();
 	vector<char*> Parse();
 };

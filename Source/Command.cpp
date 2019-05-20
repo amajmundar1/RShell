@@ -40,27 +40,4 @@ bool Command::evaluate()
 	if (WEXITSTATUS(status) == 0)
 		return true;
 	return false;
-
-	/*
-                x = waitpid(-1, &status, 0);
-                if (x == -1) {
-                        perror("waitpid failed");
-                        exit(-1);
-                }
-                else {
-                        if(WIFEXITED(status)){
-                                Parser* add1 = new Parser(Right->evaluate());
-                                char** add = add1->getParse();
-                                execvp(add[0], add);
-                                perror("parent failed");
-                        }
-                }
-        }
-        else {
-                perror("fork failed");
-                exit(-1);
-        }
-        exit(1);
-        return 0;
-	*/
 }

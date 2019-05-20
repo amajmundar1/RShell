@@ -69,11 +69,8 @@ vector<char*> Parser::Parse1()
         {
                 if ((strcmp(Tokens[i], "&&") == 0) || (strcmp(Tokens[i], "||") == 0) || (strcmp(Tokens[i], ";") == 0))
 		{
-			//char* temp;
-			//temp = **Tokens[i];
-			//**Tokens[i] = **Tokens[i+1];
-			//**Tokens[i+1] = temp;
 			swap(Tokens[i], Tokens[i+1]);
+			i++;
 		}
         }
 	return Tokens;

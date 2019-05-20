@@ -111,179 +111,234 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Project
+# Target rules for targets named rshell
 
 # Build rule for target.
-Project: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Project
-.PHONY : Project
+rshell: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rshell
+.PHONY : rshell
 
 # fast build rule for target.
-Project/fast:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/build
-.PHONY : Project/fast
+rshell/fast:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/build
+.PHONY : rshell/fast
 
-Source/Add.o: Source/Add.cpp.o
+#=============================================================================
+# Target rules for targets named test
 
-.PHONY : Source/Add.o
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
-# target to build an object file
-Source/Add.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Add.cpp.o
-.PHONY : Source/Add.cpp.o
+# fast build rule for target.
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
-Source/Add.i: Source/Add.cpp.i
+src/Add.o: src/Add.cpp.o
 
-.PHONY : Source/Add.i
-
-# target to preprocess a source file
-Source/Add.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Add.cpp.i
-.PHONY : Source/Add.cpp.i
-
-Source/Add.s: Source/Add.cpp.s
-
-.PHONY : Source/Add.s
-
-# target to generate assembly for a file
-Source/Add.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Add.cpp.s
-.PHONY : Source/Add.cpp.s
-
-Source/Command.o: Source/Command.cpp.o
-
-.PHONY : Source/Command.o
+.PHONY : src/Add.o
 
 # target to build an object file
-Source/Command.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Command.cpp.o
-.PHONY : Source/Command.cpp.o
+src/Add.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.o
+.PHONY : src/Add.cpp.o
 
-Source/Command.i: Source/Command.cpp.i
+src/Add.i: src/Add.cpp.i
 
-.PHONY : Source/Command.i
+.PHONY : src/Add.i
 
 # target to preprocess a source file
-Source/Command.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Command.cpp.i
-.PHONY : Source/Command.cpp.i
+src/Add.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.i
+.PHONY : src/Add.cpp.i
 
-Source/Command.s: Source/Command.cpp.s
+src/Add.s: src/Add.cpp.s
 
-.PHONY : Source/Command.s
+.PHONY : src/Add.s
 
 # target to generate assembly for a file
-Source/Command.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Command.cpp.s
-.PHONY : Source/Command.cpp.s
+src/Add.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.s
+.PHONY : src/Add.cpp.s
 
-Source/Or.o: Source/Or.cpp.o
+src/Command.o: src/Command.cpp.o
 
-.PHONY : Source/Or.o
+.PHONY : src/Command.o
 
 # target to build an object file
-Source/Or.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Or.cpp.o
-.PHONY : Source/Or.cpp.o
+src/Command.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.o
+.PHONY : src/Command.cpp.o
 
-Source/Or.i: Source/Or.cpp.i
+src/Command.i: src/Command.cpp.i
 
-.PHONY : Source/Or.i
+.PHONY : src/Command.i
 
 # target to preprocess a source file
-Source/Or.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Or.cpp.i
-.PHONY : Source/Or.cpp.i
+src/Command.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.i
+.PHONY : src/Command.cpp.i
 
-Source/Or.s: Source/Or.cpp.s
+src/Command.s: src/Command.cpp.s
 
-.PHONY : Source/Or.s
+.PHONY : src/Command.s
 
 # target to generate assembly for a file
-Source/Or.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Or.cpp.s
-.PHONY : Source/Or.cpp.s
+src/Command.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.s
+.PHONY : src/Command.cpp.s
 
-Source/Parser.o: Source/Parser.cpp.o
+src/Or.o: src/Or.cpp.o
 
-.PHONY : Source/Parser.o
+.PHONY : src/Or.o
 
 # target to build an object file
-Source/Parser.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Parser.cpp.o
-.PHONY : Source/Parser.cpp.o
+src/Or.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.o
+.PHONY : src/Or.cpp.o
 
-Source/Parser.i: Source/Parser.cpp.i
+src/Or.i: src/Or.cpp.i
 
-.PHONY : Source/Parser.i
+.PHONY : src/Or.i
 
 # target to preprocess a source file
-Source/Parser.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Parser.cpp.i
-.PHONY : Source/Parser.cpp.i
+src/Or.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.i
+.PHONY : src/Or.cpp.i
 
-Source/Parser.s: Source/Parser.cpp.s
+src/Or.s: src/Or.cpp.s
 
-.PHONY : Source/Parser.s
+.PHONY : src/Or.s
 
 # target to generate assembly for a file
-Source/Parser.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Parser.cpp.s
-.PHONY : Source/Parser.cpp.s
+src/Or.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.s
+.PHONY : src/Or.cpp.s
 
-Source/Semi.o: Source/Semi.cpp.o
+src/Parser.o: src/Parser.cpp.o
 
-.PHONY : Source/Semi.o
+.PHONY : src/Parser.o
 
 # target to build an object file
-Source/Semi.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Semi.cpp.o
-.PHONY : Source/Semi.cpp.o
+src/Parser.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.o
+.PHONY : src/Parser.cpp.o
 
-Source/Semi.i: Source/Semi.cpp.i
+src/Parser.i: src/Parser.cpp.i
 
-.PHONY : Source/Semi.i
+.PHONY : src/Parser.i
 
 # target to preprocess a source file
-Source/Semi.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Semi.cpp.i
-.PHONY : Source/Semi.cpp.i
+src/Parser.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.i
+.PHONY : src/Parser.cpp.i
 
-Source/Semi.s: Source/Semi.cpp.s
+src/Parser.s: src/Parser.cpp.s
 
-.PHONY : Source/Semi.s
+.PHONY : src/Parser.s
 
 # target to generate assembly for a file
-Source/Semi.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/Semi.cpp.s
-.PHONY : Source/Semi.cpp.s
+src/Parser.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.s
+.PHONY : src/Parser.cpp.s
 
-Source/main.o: Source/main.cpp.o
+src/Semi.o: src/Semi.cpp.o
 
-.PHONY : Source/main.o
+.PHONY : src/Semi.o
 
 # target to build an object file
-Source/main.cpp.o:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/main.cpp.o
-.PHONY : Source/main.cpp.o
+src/Semi.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.o
+.PHONY : src/Semi.cpp.o
 
-Source/main.i: Source/main.cpp.i
+src/Semi.i: src/Semi.cpp.i
 
-.PHONY : Source/main.i
+.PHONY : src/Semi.i
 
 # target to preprocess a source file
-Source/main.cpp.i:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/main.cpp.i
-.PHONY : Source/main.cpp.i
+src/Semi.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.i
+.PHONY : src/Semi.cpp.i
 
-Source/main.s: Source/main.cpp.s
+src/Semi.s: src/Semi.cpp.s
 
-.PHONY : Source/main.s
+.PHONY : src/Semi.s
 
 # target to generate assembly for a file
-Source/main.cpp.s:
-	$(MAKE) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/Source/main.cpp.s
-.PHONY : Source/main.cpp.s
+src/Semi.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.s
+.PHONY : src/Semi.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+unit_tests/test.o: unit_tests/test.cpp.o
+
+.PHONY : unit_tests/test.o
+
+# target to build an object file
+unit_tests/test.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/test.cpp.o
+.PHONY : unit_tests/test.cpp.o
+
+unit_tests/test.i: unit_tests/test.cpp.i
+
+.PHONY : unit_tests/test.i
+
+# target to preprocess a source file
+unit_tests/test.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/test.cpp.i
+.PHONY : unit_tests/test.cpp.i
+
+unit_tests/test.s: unit_tests/test.cpp.s
+
+.PHONY : unit_tests/test.s
+
+# target to generate assembly for a file
+unit_tests/test.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_tests/test.cpp.s
+.PHONY : unit_tests/test.cpp.s
 
 # Help Target
 help:
@@ -292,26 +347,30 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... Project"
 	@echo "... rebuild_cache"
-	@echo "... Source/Add.o"
-	@echo "... Source/Add.i"
-	@echo "... Source/Add.s"
-	@echo "... Source/Command.o"
-	@echo "... Source/Command.i"
-	@echo "... Source/Command.s"
-	@echo "... Source/Or.o"
-	@echo "... Source/Or.i"
-	@echo "... Source/Or.s"
-	@echo "... Source/Parser.o"
-	@echo "... Source/Parser.i"
-	@echo "... Source/Parser.s"
-	@echo "... Source/Semi.o"
-	@echo "... Source/Semi.i"
-	@echo "... Source/Semi.s"
-	@echo "... Source/main.o"
-	@echo "... Source/main.i"
-	@echo "... Source/main.s"
+	@echo "... rshell"
+	@echo "... test"
+	@echo "... src/Add.o"
+	@echo "... src/Add.i"
+	@echo "... src/Add.s"
+	@echo "... src/Command.o"
+	@echo "... src/Command.i"
+	@echo "... src/Command.s"
+	@echo "... src/Or.o"
+	@echo "... src/Or.i"
+	@echo "... src/Or.s"
+	@echo "... src/Parser.o"
+	@echo "... src/Parser.i"
+	@echo "... src/Parser.s"
+	@echo "... src/Semi.o"
+	@echo "... src/Semi.i"
+	@echo "... src/Semi.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... unit_tests/test.o"
+	@echo "... unit_tests/test.i"
+	@echo "... unit_tests/test.s"
 .PHONY : help
 
 

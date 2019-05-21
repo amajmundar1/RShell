@@ -56,6 +56,38 @@ CMAKE_BINARY_DIR = /home/amajm/CS100Project/spring-2019-assignment-cs100-abdulla
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake.exe -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -67,16 +99,28 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake.exe -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install/strip
+install/strip/fast: install/strip
 
-.PHONY : rebuild_cache/fast
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake.exe -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake.exe -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +155,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test
+
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
+
+# fast build rule for target.
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
+
+#=============================================================================
 # Target rules for targets named rshell
 
 # Build rule for target.
@@ -124,17 +181,56 @@ rshell/fast:
 .PHONY : rshell/fast
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named gmock_main
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test
-.PHONY : test
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock_main
+.PHONY : gmock_main
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+gmock_main/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock_main.dir/build.make googletest/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock.dir/build.make googletest/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest.dir/build.make googletest/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest_main.dir/build.make googletest/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
 
 src/Add.o: src/Add.cpp.o
 
@@ -142,8 +238,8 @@ src/Add.o: src/Add.cpp.o
 
 # target to build an object file
 src/Add.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.o
 .PHONY : src/Add.cpp.o
 
 src/Add.i: src/Add.cpp.i
@@ -152,8 +248,8 @@ src/Add.i: src/Add.cpp.i
 
 # target to preprocess a source file
 src/Add.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.i
 .PHONY : src/Add.cpp.i
 
 src/Add.s: src/Add.cpp.s
@@ -162,8 +258,8 @@ src/Add.s: src/Add.cpp.s
 
 # target to generate assembly for a file
 src/Add.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Add.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.s
 .PHONY : src/Add.cpp.s
 
 src/Command.o: src/Command.cpp.o
@@ -172,8 +268,8 @@ src/Command.o: src/Command.cpp.o
 
 # target to build an object file
 src/Command.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.o
 .PHONY : src/Command.cpp.o
 
 src/Command.i: src/Command.cpp.i
@@ -182,8 +278,8 @@ src/Command.i: src/Command.cpp.i
 
 # target to preprocess a source file
 src/Command.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.i
 .PHONY : src/Command.cpp.i
 
 src/Command.s: src/Command.cpp.s
@@ -192,8 +288,8 @@ src/Command.s: src/Command.cpp.s
 
 # target to generate assembly for a file
 src/Command.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Command.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.s
 .PHONY : src/Command.cpp.s
 
 src/Or.o: src/Or.cpp.o
@@ -202,8 +298,8 @@ src/Or.o: src/Or.cpp.o
 
 # target to build an object file
 src/Or.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.o
 .PHONY : src/Or.cpp.o
 
 src/Or.i: src/Or.cpp.i
@@ -212,8 +308,8 @@ src/Or.i: src/Or.cpp.i
 
 # target to preprocess a source file
 src/Or.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.i
 .PHONY : src/Or.cpp.i
 
 src/Or.s: src/Or.cpp.s
@@ -222,8 +318,8 @@ src/Or.s: src/Or.cpp.s
 
 # target to generate assembly for a file
 src/Or.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Or.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Or.cpp.s
 .PHONY : src/Or.cpp.s
 
 src/Parser.o: src/Parser.cpp.o
@@ -232,8 +328,8 @@ src/Parser.o: src/Parser.cpp.o
 
 # target to build an object file
 src/Parser.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.o
 .PHONY : src/Parser.cpp.o
 
 src/Parser.i: src/Parser.cpp.i
@@ -242,8 +338,8 @@ src/Parser.i: src/Parser.cpp.i
 
 # target to preprocess a source file
 src/Parser.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.i
 .PHONY : src/Parser.cpp.i
 
 src/Parser.s: src/Parser.cpp.s
@@ -252,8 +348,8 @@ src/Parser.s: src/Parser.cpp.s
 
 # target to generate assembly for a file
 src/Parser.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.s
 .PHONY : src/Parser.cpp.s
 
 src/Semi.o: src/Semi.cpp.o
@@ -262,8 +358,8 @@ src/Semi.o: src/Semi.cpp.o
 
 # target to build an object file
 src/Semi.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.o
 .PHONY : src/Semi.cpp.o
 
 src/Semi.i: src/Semi.cpp.i
@@ -272,8 +368,8 @@ src/Semi.i: src/Semi.cpp.i
 
 # target to preprocess a source file
 src/Semi.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.i
 .PHONY : src/Semi.cpp.i
 
 src/Semi.s: src/Semi.cpp.s
@@ -282,8 +378,8 @@ src/Semi.s: src/Semi.cpp.s
 
 # target to generate assembly for a file
 src/Semi.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Semi.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Semi.cpp.s
 .PHONY : src/Semi.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -346,10 +442,18 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... rshell"
 	@echo "... test"
+	@echo "... install/local"
+	@echo "... list_install_components"
+	@echo "... edit_cache"
+	@echo "... rshell"
+	@echo "... install/strip"
+	@echo "... install"
+	@echo "... gmock_main"
+	@echo "... gmock"
+	@echo "... gtest"
+	@echo "... gtest_main"
 	@echo "... src/Add.o"
 	@echo "... src/Add.i"
 	@echo "... src/Add.s"

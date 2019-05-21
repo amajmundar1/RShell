@@ -7,6 +7,7 @@ Command::Command(vector<char*> input)
 	else
 	{
 		Input = input;
+		cout << Input[0] << endl;
 		empty = false;
 	}
 }

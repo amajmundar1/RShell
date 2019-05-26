@@ -4,7 +4,7 @@
 using namespace std;
 
 bool Or::evaluate() {
-	if (Left->evaluate())
+	if(Left->evaluate())
 		return true;
 	else if (Right->evaluate())
 		return true;

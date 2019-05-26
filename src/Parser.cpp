@@ -1,5 +1,6 @@
 #include "../header/Parser.h"
 #include <bits/stdc++.h>
+#include <stack>
 
 Parser::Parser(string input)
 {
@@ -11,8 +12,9 @@ Parser::Parser(char* input)
 	Input = input;
 }
 
-vector<char*> Parser::Parse1()
+vector<char*> Parser::ParseOperator()
 {
+	stack<char*> Stack;
 	vector<char*> Tokens;
 	char temp[999];
 	temp[0] = '\0';
@@ -20,12 +22,34 @@ vector<char*> Parser::Parse1()
 	{
 		switch(Input[i])
 		{
+			case '(':
+				{
+					Stack.push(strndup(&Input[i], 1));
+				}
+				break;
+			case ')':
+				{
+					if (strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					temp[0] = '\0';
+					while (strcmp(Stack.top(), "(") != 0)
+					{
+						Tokens.push_back(Stack.top());
+						Stack.pop();
+					}
+					Stack.pop();
+					if(Input[i+1] == ' ')
+						i++;
+				}
+				break;
 			case ';':
                                 {
                                         if (strlen(temp) > 0)
                                                 Tokens.push_back(strdup(temp));
-                                        Tokens.push_back(strndup(&Input[i], 1));
+                                        Stack.push(strndup(&Input[i], 1));
                                         temp[0] = '\0';
+					if(Input[i+1] == ' ')
+                                                i++;
                                 }
                                 break;
                         case '&':
@@ -34,12 +58,14 @@ vector<char*> Parser::Parse1()
                                         {
                                                 if(strlen(temp) > 0)
                                                         Tokens.push_back(strdup(temp));
-                                                Tokens.push_back(strndup(&Input[i], 2));
+                                                Stack.push(strndup(&Input[i], 2));
                                                 temp[0] = '\0';
                                                 i++;
                                         }
                                         else
                                                 strncat(temp, &Input[i], 1);
+					if(Input[i+1] == ' ')
+                                                i++;
                                 }
                                 break;
                         case '|':
@@ -48,12 +74,14 @@ vector<char*> Parser::Parse1()
                                         {
                                                 if (strlen(temp) > 0)
                                                         Tokens.push_back(strdup(temp));
-                                                Tokens.push_back(strndup(&Input[i], 2));
+                                                Stack.push(strndup(&Input[i], 2));
                                                 temp[0] = '\0';
                                                 i++;
                                         }
                                         else
                                                 strncat(temp, &Input[i], 1);
+					if(Input[i+1] == ' ')
+                                                i++;
                                 }
                                 break;
 			default:
@@ -65,19 +93,16 @@ vector<char*> Parser::Parse1()
 	}
 	if (strlen(temp) > 0)
                 Tokens.push_back(strdup(temp));
-        for(int i = 0; i < Tokens.size(); ++i)
-        {
-                if ((strcmp(Tokens[i], "&&") == 0) || (strcmp(Tokens[i], "||") == 0) || (strcmp(Tokens[i], ";") == 0))
-		{
-			swap(Tokens[i], Tokens[i+1]);
-			i++;
-		}
-        }
+	while (!Stack.empty())
+	{
+		Tokens.push_back(Stack.top());
+		Stack.pop();
+	}
 	return Tokens;
 }
 
 
-vector<char*> Parser::Parse()
+vector<char*> Parser::ParseOperand()
 {
 	vector<char*> Tokens;
 	char temp[999];

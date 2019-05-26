@@ -9,7 +9,7 @@ class Test: public Command {
 		string file;
 	public:
 		Test();
-		void evaluate();
+		bool evaluate();
 };
 
 #endif

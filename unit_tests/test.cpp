@@ -16,7 +16,7 @@ TEST(SingleCommand, CommandTestSet)
 {
 	string input = "echo hello";
 	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
+	vector<char*> Input = parse->ParseOperand();
 	Command* cmd = new Command(Input);
 	cmd->evaluate();
 	EXPECT_EQ(true, cmd->evaluate());

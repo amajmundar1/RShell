@@ -2,9 +2,11 @@
 #include <string>
 #include <bits/stdc++.h>
 #include <vector>
+#include <stack>
 #include <unistd.h>
 #include "../header/Parser.h"
 #include "../header/Command.h"
+#include "../header/Operator.h"
 #include "../header/Add.h"
 #include "../header/Or.h"
 #include "../header/Semi.h"
@@ -21,65 +23,174 @@ int main()
 		getline(cin, input);
 		if (input == "exit")
 			exit = true;
+		else if(input.empty())
+			exit = false;
 		else 
 		{
 			Parser* pars = new Parser(input);
-			vector<char*> Param = pars->Parse1();
-			vector<Command*> CMD;
-			vector<Add*> ADD;
-			vector<Semi*> SEMI;
-			vector<Or*> OR;
-			
-			for(int i = 0; i < Param.size(); i++)
+			vector<char*> Param = pars->ParseOperator();
+
+			stack<Command*> CMD;
+			stack<Operator*> OP;
+
+			for (int i = 0; i < Param.size(); i++)
 			{
-				if (strcmp(Param[i], "&&") == 0)
+				if(strcmp(Param[i] , "&&") == 0)
 				{
-					if (strcmp(Param[i-2], "&&") == 0)
-						ADD.push_back(new Add(ADD[ADD.size()-1], CMD[CMD.size()-1]));
-					else if (strcmp(Param[i-2], "||") == 0)
-						ADD.push_back(new Add(OR[OR.size()-1], CMD[CMD.size()-1]));
-					else if (strcmp(Param[i-2], ";") == 0)
-						ADD.push_back(new Add(SEMI[OR.size()-1], CMD[CMD.size()-1]));
+					if (CMD.empty())
+					{
+						Operator* right = OP.top();
+						OP.pop();
+						Operator* left = OP.top();
+						OP.push(right);
+						OP.push(new Add(left, right));
+					}
+					else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+					{
+						if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+						{
+							Command* right = CMD.top();
+							CMD.pop();
+							Command* left = CMD.top();
+							CMD.pop();
+							OP.push(new Add(left, right));
+						}
+						else
+						{
+							Operator* left = OP.top();
+							Command* right = CMD.top();
+							CMD.pop();
+							OP.push(new Add(left, right));
+						}
+					}
 					else
-						ADD.push_back(new Add(CMD[CMD.size()-1], CMD[CMD.size()-2]));
+					{
+						if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+						{
+							Command* left = CMD.top();
+							CMD.pop();
+							Operator* right = OP.top();
+							OP.push(new Add(left, right));
+						}
+						else
+						{
+							Operator* right = OP.top();
+							OP.pop();
+							Operator* left = OP.top();
+							OP.push(right);
+							OP.push(new Add(left, right));
+						}
+					}
 				}
-				else if (strcmp(Param[i], "||") == 0)
-				{
-					if (strcmp(Param[i-2], "&&") == 0)
-                                                OR.push_back(new Or(ADD[ADD.size()-1], CMD[CMD.size()-1]));
-                                        else if (strcmp(Param[i-2], "||") == 0)
-                                                OR.push_back(new Or(OR[OR.size()-1], CMD[CMD.size()-1]));
-                                        else if (strcmp(Param[i-2], ";") == 0)
-                                                OR.push_back(new Or(SEMI[OR.size()-1], CMD[CMD.size()-1]));
+				else if(strcmp(Param[i] , "||") == 0)
+                                {
+					if (CMD.empty())
+					{
+						Operator* right = OP.top();
+                                                OP.pop();
+                                                Operator* left = OP.top();
+                                                OP.push(right);
+                                                OP.push(new Or(left, right));
+					}
+					else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+                                        {
+                                                if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+                                                {
+                                                        Command* right = CMD.top();
+                                                        CMD.pop();
+                                                        Command* left = CMD.top();
+                                                        CMD.pop();
+                                                        OP.push(new Or(left, right));
+                                                }
+                                                else
+                                                {
+							Operator* left = OP.top();
+                                                        Command* right = CMD.top();
+                                                        CMD.pop();
+                                                        OP.push(new Or(left, right));
+
+                                                }
+                                        }
                                         else
-                                                OR.push_back(new Or(CMD[CMD.size()-1], CMD[CMD.size()-2]));
-				}
-				else if (strcmp(Param[i], ";") == 0)
-				{
-					if (strcmp(Param[i-2], "&&") == 0)
-                                                SEMI.push_back(new Semi(ADD[ADD.size()-1], CMD[CMD.size()-1]));
-                                        else if (strcmp(Param[i-2], "||") == 0)
-                                                SEMI.push_back(new Semi(OR[OR.size()-1], CMD[CMD.size()-1]));
-                                        else if (strcmp(Param[i-2], ";") == 0)
-                                                SEMI.push_back(new Semi(SEMI[OR.size()-1], CMD[CMD.size()-1]));
+                                        {
+                                                if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+                                                {
+                                                        Command* left = CMD.top();
+                                                        CMD.pop();
+                                                        Operator* right = OP.top();
+                                                        OP.push(new Or(left, right));
+                                                }
+                                                else
+                                                {
+                                                        Operator* right = OP.top();
+                                                        OP.pop();
+                                                        Operator* left = OP.top();
+							OP.push(right);
+                                                        OP.push(new Or(left, right));
+                                                }
+                                        }
+                                }
+				else if(strcmp(Param[i] , ";") == 0)
+                                {
+					if (CMD.empty())
+					{
+						Operator* right = OP.top();
+                                                OP.pop();
+                                                Operator* left = OP.top();
+                                                OP.push(right);
+                                                OP.push(new Semi(left, right));
+					}
+					else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+                                        {
+                                                if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+                                                {
+                                                        Command* right = CMD.top();
+                                                        CMD.pop();
+                                                        Command* left = CMD.top();
+                                                        CMD.pop();
+                                                        OP.push(new Semi(left, right));
+                                                }
+                                                else
+                                                {
+                                                        Operator* left = OP.top();
+                                                        Command* right = CMD.top();
+                                                        CMD.pop();
+                                                        OP.push(new Semi(left, right));
+
+                                                }
+                                        }
                                         else
-                                                SEMI.push_back(new Semi(CMD[CMD.size()-1], CMD[CMD.size()-2]));
-				}
+                                        {
+                                                if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
+                                                {
+                                                        Command* left = CMD.top();
+                                                        CMD.pop();
+                                                        Operator* right = OP.top();
+                                                        OP.push(new Semi(left, right));
+                                                }
+                                                else
+                                                {
+                                                        Operator* right = OP.top();
+                                                        OP.pop();
+                                                        Operator* left = OP.top();
+							OP.push(right);
+                                                        OP.push(new Semi(left, right));
+                                                }
+                                        }
+                                }
 				else
 				{
 					Parser* sub_parse = new Parser(Param[i]);
-					vector<char*> newParam = sub_parse->Parse();
-					CMD.push_back(new Command(newParam));
+                                        vector<char*> newParam = sub_parse->ParseOperand();
+                                        CMD.push(new Command(newParam));
 				}
 			}
-			if (strcmp(Param[Param.size()-1], "&&") == 0)
-				ADD[ADD.size()-1]->evaluate();
-			else if (strcmp(Param[Param.size()-1], "||") == 0)
-				OR[OR.size()-1]->evaluate();
-			else if (strcmp(Param[Param.size()-1], ";") == 0)
-				SEMI[SEMI.size()-1]->evaluate();
+
+			if (!OP.empty())
+				OP.top()->evaluate();
 			else
-				CMD[CMD.size()-1]->evaluate();
+				CMD.top()->evaluate();
+
 		}
 	}
 }

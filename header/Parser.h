@@ -13,6 +13,6 @@ private:
 public:
 	Parser(string input);
 	Parser(char* input);
-	vector<char*> Parse1();
-	vector<char*> Parse();
+	vector<char*> ParseOperator();
+	vector<char*> ParseOperand();
 };

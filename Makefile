@@ -292,6 +292,36 @@ src/Command.cpp.s:
 	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Command.cpp.s
 .PHONY : src/Command.cpp.s
 
+src/ConstructTree.o: src/ConstructTree.cpp.o
+
+.PHONY : src/ConstructTree.o
+
+# target to build an object file
+src/ConstructTree.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/ConstructTree.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ConstructTree.cpp.o
+.PHONY : src/ConstructTree.cpp.o
+
+src/ConstructTree.i: src/ConstructTree.cpp.i
+
+.PHONY : src/ConstructTree.i
+
+# target to preprocess a source file
+src/ConstructTree.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/ConstructTree.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ConstructTree.cpp.i
+.PHONY : src/ConstructTree.cpp.i
+
+src/ConstructTree.s: src/ConstructTree.cpp.s
+
+.PHONY : src/ConstructTree.s
+
+# target to generate assembly for a file
+src/ConstructTree.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/ConstructTree.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/ConstructTree.cpp.s
+.PHONY : src/ConstructTree.cpp.s
+
 src/Or.o: src/Or.cpp.o
 
 .PHONY : src/Or.o
@@ -460,6 +490,9 @@ help:
 	@echo "... src/Command.o"
 	@echo "... src/Command.i"
 	@echo "... src/Command.s"
+	@echo "... src/ConstructTree.o"
+	@echo "... src/ConstructTree.i"
+	@echo "... src/ConstructTree.s"
 	@echo "... src/Or.o"
 	@echo "... src/Or.i"
 	@echo "... src/Or.s"

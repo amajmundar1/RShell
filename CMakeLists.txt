@@ -11,6 +11,7 @@ ADD_EXECUTABLE(rshell
     src/Or.cpp
     src/Semi.cpp
     src/Command.cpp
+    src/ConstructTree.cpp
 )
 
 ADD_EXECUTABLE(test
@@ -20,6 +21,7 @@ ADD_EXECUTABLE(test
     src/Or.cpp
     src/Semi.cpp
     src/Command.cpp
+    src/ConstructTree.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)

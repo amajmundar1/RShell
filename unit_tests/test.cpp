@@ -1,17 +1,22 @@
 // Put the google tests here
-#include <iostream>
-#include "../header/Add.h"
-#include "../header/Or.h"
-#include "../header/Semi.h"
-#include "../header/Command.h"
-#include "../header/Parser.h"
-#include "../header/ConstructTree.h"
 #include "gtest/gtest.h"
-#include <string.h>
-#include <unistd.h>
+//#include <string.h>
 #include <vector>
 #include <stack>
 
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
+#include <vector>
+#include <stack>
+#include <unistd.h>
+#include "../header/Parser.h"
+#include "../header/Command.h"
+#include "../header/Operator.h"
+#include "../header/Add.h"
+#include "../header/Or.h"
+#include "../header/Semi.h"
+#include "../header/ConstructTree.h"
 using namespace std;
 
 TEST(SingleCommand, Echo) {
@@ -156,6 +161,7 @@ TEST(MultCommand, And) {
 		EXPECT_EQ(OP2.top()->evaluate(), true);
 	else
 		EXPECT_EQ(CMD2.top()->evaluate(), true);
+
 }
 /*
 TEST(MultCommand, Or) {

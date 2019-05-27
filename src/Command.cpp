@@ -15,6 +15,9 @@ bool Command::evaluate()
 {
 	if (empty == true)
 		return false;
+	
+	Input.push_back(NULL);
+	
 	pid_t pid;
         pid = fork();
         int status;

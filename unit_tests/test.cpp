@@ -79,7 +79,7 @@ TEST(SingleCommand, ls) {
 }
 
 TEST(SingleCommand, Make_and_Remove) {
-	string input = "mkdir temp";
+	string input = "mkdir deleteThis";
 	Parser* parse = new Parser(input);
 	vector<char*> Input = parse->ParseOperator();
 	ConstructTree* BuildTree = new ConstructTree(Input);
@@ -90,7 +90,7 @@ TEST(SingleCommand, Make_and_Remove) {
 	else
 		EXPECT_EQ(CMD.top()->evaluate(), true);
 
-	string input1 = "rm -r temp";
+	string input1 = "rm -r deleteThis";
 	Parser* parse1 = new Parser(input1);
 	vector<char*> Input1 = parse1->ParseOperator();
 	ConstructTree* BuildTree1 = new ConstructTree(Input1);

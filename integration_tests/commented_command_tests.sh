@@ -9,3 +9,4 @@ ps; #echo X
 ls -a #|| ls -r && echo X
 echo F; echo G; # echo x; #echo O && echo P
 echo H ######exit
+exit

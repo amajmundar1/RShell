@@ -11,6 +11,7 @@ ADD_EXECUTABLE(rshell
     src/Or.cpp
     src/Semi.cpp
     src/Command.cpp
+    src/test.cpp
     src/ConstructTree.cpp
 )
 
@@ -21,6 +22,7 @@ ADD_EXECUTABLE(test
     src/Or.cpp
     src/Semi.cpp
     src/Command.cpp
+    src/test.cpp
     src/ConstructTree.cpp
 )
 

@@ -10,6 +10,7 @@
 #include "../header/Add.h"
 #include "../header/Or.h"
 #include "../header/Semi.h"
+#include "../header/Test.h"
 #include "../header/ConstructTree.h"
 
 using namespace std;

@@ -8,3 +8,4 @@ cat file || echo file does not exist && echo E; ps
 (cat file || echo file does not exist) && (echo E; ps)
 ls -a || ls -r && echo F && exit
 (ls -a || ls -r) && (echo F && exit)
+exit

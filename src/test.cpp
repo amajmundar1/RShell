@@ -4,26 +4,35 @@
 #include "../header/Test.h"
 
 
-Test::Test() {
-	if (kjhnbv.at(1) == "-") {
-		flag = kjhnbv;
+Test::Test(vector<char*> input): Command(input) {
+	int i = 5;
+	int x = 0;
+	if (Input.at(i) != "/") {
+		cout << Input[6] << endl;
+		flag = Input[6];
+		i = 7;	
 	}
-	file = skjfhsdhf;
+	while (i != Input.size()) {
+		file[x] = Input[i];
+		++x;
+		++i;
+	}
 }
 
-void Test::evaluate() {
-	struct stat testing;
-	int status = stat(file, testing);
-	if (flag == "-f") {
-		if (S_ISREG(testing.st_mode) {
+bool Test::evaluate() {	
+	return true;
+	/*struct stat testing
+	int status = stat(file.c_str(), testing);
+	if (flag == "f") {
+		if (S_ISREG(testing.st_mode)) {
 			status = 1;
 		}
 		else {
 			status = 0;
 		}
 	}
-	else if (flag == "-d") {
-		if (S_ISDIR(testing.st_mode) {
+	else if (flag == "d") {
+		if (S_ISDIR(testing.st_mode)) {
                 	status = 1;
         	}
         	else {
@@ -31,11 +40,12 @@ void Test::evaluate() {
         	}
 	}
 
-	if (testing == 1) {
+	if (status == 1) {
 		cout << "(True)" << endl;
+		return true;
 	}
 	else {
 		cout << "(False)" << endl;
-	}
-	return;
+		return false;
+	}*/
 }

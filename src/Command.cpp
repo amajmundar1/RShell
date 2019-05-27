@@ -1,4 +1,5 @@
 #include "../header/Command.h"
+#include "../header/Test.h"
 
 Command::Command(vector<char*> input)
 {
@@ -15,7 +16,11 @@ bool Command::evaluate()
 {
 	if (empty == true)
 		return false;
-	
+	if (strcmp(Input[0], "test") == 0)/* || (brackets)*/ {
+		Test* test = new Test(Input);
+		return test->evaluate();
+	}
+
 	Input.push_back(NULL);
 	
 	pid_t pid;

@@ -16,7 +16,9 @@
 #include "../header/Add.h"
 #include "../header/Or.h"
 #include "../header/Semi.h"
+#include "../header/Test.h"
 #include "../header/ConstructTree.h"
+
 using namespace std;
 
 TEST(SingleCommand, Echo) {
@@ -336,30 +338,50 @@ TEST(MultCommand, parentheses) {
 	else
 		EXPECT_EQ(CMD1.top()->evaluate(), true);
 }
-/*
+
 TEST(SingleCommand, test) {
-	string input = "test /src/Add.cpp"
+	string input = "test /src/Add.cpp";
 	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
-	Command* cmd = new Command(Input);
-	EXPECT_EQ(cmd->evaluate(), true);
+	vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(), true);
 	string input2 = "test -e /src/Or.cpp";
 	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->Parse();
-	Command* cmd2 = new Command(Input2);
-	EXPECT_EQ(cmd2->evaluate(), true);
+	vector<char*> Input2 = parse2->ParseOperator();
+        ConstructTree* BuildTree2 = new ConstructTree(Input2);
+        stack<Command*> CMD2 = BuildTree2->getCommands();
+        stack<Operator*> OP2 = BuildTree2->getOperators();
+        if (!OP2.empty())
+                EXPECT_EQ(OP2.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD2.top()->evaluate(), true);
 	string input3 = "test -f /integration_tests/exit_command_test.sh";
 	Parser* parse3 = new Parser(input3);
-	vector<char*> Input3 = parse3->Parse();
-	Command* cmd3 = new Command(Input3);
-	EXPECT_EQ(cmd3->evaluate(), true);
+	vector<char*> Input3 = parse3->ParseOperator();
+        ConstructTree* BuildTree3 = new ConstructTree(Input3);
+        stack<Command*> CMD3 = BuildTree3->getCommands();
+        stack<Operator*> OP3 = BuildTree3->getOperators();
+        if (!OP3.empty())
+                EXPECT_EQ(OP3.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD3.top()->evaluate(), true);
 	string input4 = "test -d /header/";
 	Parser* parse4 = new Parser(input4);
-	vector<char*> Input4 = parse4->Parse();
-	Command* cmd4 = new Command(Input4);
-	EXPECT_EQ(cmd4->evaluate(), true);
+	vector<char*> Input4 = parse4->ParseOperator();
+        ConstructTree* BuildTree4 = new ConstructTree(Input4);
+        stack<Command*> CMD4 = BuildTree4->getCommands();
+        stack<Operator*> OP4 = BuildTree4->getOperators();
+        if (!OP4.empty())
+                EXPECT_EQ(OP4.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD4.top()->evaluate(), true);
 }
-*/
+
 
 int main(int argc, char **argv) {
      ::testing::InitGoogleTest(&argc, argv);

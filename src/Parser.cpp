@@ -84,6 +84,13 @@ vector<char*> Parser::ParseOperator()
                                                 i++;
                                 }
                                 break;
+			case '#':
+				{
+					if (strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					i = strlen(Input)-1;
+				}
+				break;
 			default:
 				{
                                         strncat(temp, &Input[i], 1);
@@ -98,6 +105,8 @@ vector<char*> Parser::ParseOperator()
 		Tokens.push_back(Stack.top());
 		Stack.pop();
 	}
+	for (int i = 0; i < Tokens.size(); i++)
+		cout << Tokens[i] << endl;
 	return Tokens;
 }
 

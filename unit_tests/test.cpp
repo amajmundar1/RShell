@@ -158,48 +158,82 @@ TEST(MultCommand, And) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), true);
+		EXPECT_EQ(OP2.top()->evaluate(), false);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), true);
+		EXPECT_EQ(CMD2.top()->evaluate(), false);
 
 }
-/*
+
 TEST(MultCommand, Or) {
 	string input = "echo A || echo wrong output";
 	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
-	Command* cmd = new Command(Input);
-	EXPECT_EQ(cmd->evaluate(), true);
-	string input2 = "ls || echo hello";
+	vector<char*> Input = parse->ParseOperator();
+	ConstructTree* BuildTree = new ConstructTree(Input);
+	stack<Command*> CMD = BuildTree->getCommands();
+	stack<Operator*> OP = BuildTree->getOperators();
+	if (!OP.empty())
+		EXPECT_EQ(OP.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD.top()->evaluate(), true);
+
+	string input1 = "ls || echo hello";
+	Parser* parse1 = new Parser(input1);
+	vector<char*> Input1 = parse1->ParseOperator();
+	ConstructTree* BuildTree1 = new ConstructTree(Input1);
+	stack<Command*> CMD1 = BuildTree1->getCommands();
+	stack<Operator*> OP1 = BuildTree1->getOperators();
+	if (!OP1.empty())
+		EXPECT_EQ(OP1.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD1.top()->evaluate(), true);
+
+	string input2 = "cat fakeFile || echo B";
 	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->Parse();
-	Command* cmd2 = new Command(Input2);
-	EXPECT_EQ(cmd2->evaluate(), true);
-	string input3 = "cat fakeFile || echo B";
-	Parser* parse3 = new Parser(input3);
-	vector<char*> Input3 = parse3->Parse();
-	Command* cmd3 = new Command(Input3);
-	EXPECT_EQ(cmd3->evaluate(), true);
+	vector<char*> Input2 = parse2->ParseOperator();
+	ConstructTree* BuildTree2 = new ConstructTree(Input2);
+	stack<Command*> CMD2 = BuildTree2->getCommands();
+	stack<Operator*> OP2 = BuildTree2->getOperators();
+	if (!OP2.empty())
+		EXPECT_EQ(OP2.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD2.top()->evaluate(), true);
 }
 
 TEST(MultCommand, Semi) {
 	string input = "echo A; echo B";
 	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
-	Command* cmd = new Command(Input);
-	EXPECT_EQ(cmd->evaluate(), true);
-	string input2 = "ls; ps";
-	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->Parse();
-	Command* cmd2 = new Command(Input2);
-	EXPECT_EQ(cmd2->evaluate(), true);
-	string input3 = "cat fakeFile; echo C; ls;";
-	Parser* parse3 = new Parser(input3);
-	vector<char*> Input3 = parse3->Parse();
-	Command* cmd3 = new Command(Input3);
-	EXPECT_EQ(cmd3->evaluate(), true);
-}
+	vector<char*> Input = parse->ParseOperator();
+	ConstructTree* BuildTree = new ConstructTree(Input);
+	stack<Command*> CMD = BuildTree->getCommands();
+	stack<Operator*> OP = BuildTree->getOperators();
+	if (!OP.empty())
+		EXPECT_EQ(OP.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD.top()->evaluate(), true);
 
+	string input1 = "ls; ps";
+	Parser* parse1 = new Parser(input1);
+	vector<char*> Input1 = parse1->ParseOperator();
+	ConstructTree* BuildTree1 = new ConstructTree(Input1);
+	stack<Command*> CMD1 = BuildTree1->getCommands();
+	stack<Operator*> OP1 = BuildTree1->getOperators();
+	if (!OP1.empty())
+		EXPECT_EQ(OP1.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD1.top()->evaluate(), true);
+
+	string input2 = "cat fakeFile; echo C; ls;";
+	Parser* parse2 = new Parser(input2);
+	vector<char*> Input2 = parse2->ParseOperator();
+	ConstructTree* BuildTree2 = new ConstructTree(Input2);
+	stack<Command*> CMD2 = BuildTree2->getCommands();
+	stack<Operator*> OP2 = BuildTree2->getOperators();
+	if (!OP2.empty())
+		EXPECT_EQ(OP2.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD2.top()->evaluate(), true);
+}
+/*
 TEST(MultCommand, Comment) {
 	string input = "echo A # echo X";
 	Parser* parse = new Parser(input);
@@ -217,41 +251,68 @@ TEST(MultCommand, Comment) {
 	Command* cmd3 = new Command(Input3);
 	EXPECT_EQ(cmd3->evaluate(), true);
 }
-
+*/
 TEST(MultCommand, Combo) {
 	string input = "echo A && echo B || ls";
 	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
-	Command* cmd = new Command(Input);
-	EXPECT_EQ(cmd->evaluate(), true);
-	string input2 = "ls; ps && echo C";
+	vector<char*> Input = parse->ParseOperator();
+	ConstructTree* BuildTree = new ConstructTree(Input);
+	stack<Command*> CMD = BuildTree->getCommands();
+	stack<Operator*> OP = BuildTree->getOperators();
+	if (!OP.empty())
+		EXPECT_EQ(OP.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD.top()->evaluate(), true);
+
+	string input1 = "ls; ps && echo C";
+	Parser* parse1 = new Parser(input1);
+	vector<char*> Input1 = parse1->ParseOperator();
+	ConstructTree* BuildTree1 = new ConstructTree(Input1);
+	stack<Command*> CMD1 = BuildTree1->getCommands();
+	stack<Operator*> OP1 = BuildTree1->getOperators();
+	if (!OP1.empty())
+		EXPECT_EQ(OP1.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD1.top()->evaluate(), true);
+
+	string input2 = "cat file || echo \"file does not exist\" && echo D; ls || ls -r";
 	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->Parse();
-	Command* cmd2 = new Command(Input2);
-	EXPECT_EQ(cmd2->evaluate(), true);
-	string input3 = "cat file || echo file does not exist && echo D; ls || ls -r";
-	Parser* parse3 = new Parser(input3);
-	vector<char*> Input3 = parse3->Parse();
-	Command* cmd3 = new Command(Input3);
-	EXPECT_EQ(cmd3->evaluate(), true);
-}
-*/
-/*
-TEST(MultCommand, parentheses) {
-	string input = "(echo A && echo B) || (ls -a && echo C)”
-	Parser* parse = new Parser(input);
-	vector<char*> Input = parse->Parse();
-	Command* cmd = new Command(Input);
-	EXPECT_EQ(cmd->evaluate(), true);
-	string input2 = "(echo D; ls) && (mkdir temp && rm -r temp)";
-	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->Parse();
-	Command* cmd2 = new Command(Input2);
-	EXPECT_EQ(cmd2->evaluate(), true);
+	vector<char*> Input2 = parse2->ParseOperator();
+	ConstructTree* BuildTree2 = new ConstructTree(Input2);
+	stack<Command*> CMD2 = BuildTree2->getCommands();
+	stack<Operator*> OP2 = BuildTree2->getOperators();
+	if (!OP2.empty())
+		EXPECT_EQ(OP2.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD2.top()->evaluate(), true);
 }
 
+TEST(MultCommand, parentheses) {
+	string input = "(echo A && echo B) || (ls -a && echo C)";
+	Parser* parse = new Parser(input);
+	vector<char*> Input = parse->ParseOperator();
+	ConstructTree* BuildTree = new ConstructTree(Input);
+	stack<Command*> CMD = BuildTree->getCommands();
+	stack<Operator*> OP = BuildTree->getOperators();
+	if (!OP.empty())
+		EXPECT_EQ(OP.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD.top()->evaluate(), true);
+
+	string input1 = "(echo D; ls) && (mkdir temp && rm -r temp)";
+	Parser* parse1 = new Parser(input1);
+	vector<char*> Input1 = parse1->ParseOperator();
+	ConstructTree* BuildTree1 = new ConstructTree(Input1);
+	stack<Command*> CMD1 = BuildTree1->getCommands();
+	stack<Operator*> OP1 = BuildTree1->getOperators();
+	if (!OP1.empty())
+		EXPECT_EQ(OP1.top()->evaluate(), true);
+	else
+		EXPECT_EQ(CMD1.top()->evaluate(), true);
+}
+/*
 TEST(SingleCommand, test) {
-	string input = "test /src/Add.cpp”
+	string input = "test /src/Add.cpp"
 	Parser* parse = new Parser(input);
 	vector<char*> Input = parse->Parse();
 	Command* cmd = new Command(Input);

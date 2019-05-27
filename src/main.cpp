@@ -30,16 +30,17 @@ int main()
 		{
 			Parser* pars = new Parser(input);
 			vector<char*> Param = pars->ParseOperator();
-			
-			ConstructTree* BuildTree = new ConstructTree(Param);
-			stack<Command*> CMD = BuildTree->getCommands();
-			stack<Operator*> OP = BuildTree->getOperators();
+			if(!Param.empty())
+			{	
+				ConstructTree* BuildTree = new ConstructTree(Param);
+				stack<Command*> CMD = BuildTree->getCommands();
+				stack<Operator*> OP = BuildTree->getOperators();
 
-			if (!OP.empty())
-				OP.top()->evaluate();
-			else
-				CMD.top()->evaluate();
-
+				if (!OP.empty())
+					OP.top()->evaluate();
+				else
+					CMD.top()->evaluate();
+			}
 		}
 	}
 }

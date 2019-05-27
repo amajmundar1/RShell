@@ -25,11 +25,12 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	class Parser
 	{
 	private:
-		string Input;
-		string Tokenizer;
+		char *Input;
 	public:
-		Parser(string input, string tokenizer);
-		vector <string> parse();
+		Parser(string input);
+		Parser(char* input);
+		vector<char*> ParseOperator();
+		vector<char*> ParseOperand();
 	}
 	```
 2. Base
@@ -38,7 +39,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	class Base
 	{
 	public:
-		virtual string evaluate() = 0;
+		virtual bool evaluate() = 0;
 	}
 	```
 3. Command
@@ -47,10 +48,11 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	class Commands
 	{
 	private:
-		vector<string> input;
+		vector<char*> Input;
+		bool empty;
 	public:
-		Commands(vector<sting> input);
-		string evaluate();
+		Command(vector<char*> input);
+		bool evaluate();
 	}
 	```
 4. Operator
@@ -58,11 +60,13 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	``` C++
 	class Operator
 	{
-	private:
-		string OpString;
+	protected:
+        	Base* Left;
+        	Base* Right;
 	public:
-		Operator(string input);
-		string evaluate();
+		Operator(): Left(NULL), Right(NULL) {};
+        	Operator(Base* left, Base* right): Left(left), Right(right) {};
+		virtual bool evaluate() = 0;
 	}
 	```
 5. Add
@@ -70,13 +74,9 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	``` C++
 	class Add
 	{
-	private:
-		Base* command1;
-		Base* command2;
 	public:
-		Add();
-		Add(Base* CMD1, Base* CMD2);
-		string evaluate();
+		Add(Base* left, Base* right) : Operator(left, right) {};
+		bool evaluate();
 	}
 	```
 6. Or
@@ -84,13 +84,10 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	``` C++
 	class Or
 	{
-	private:
-		Base* command1;
-		Base* command2;
 	public:
 		Or();
-		Or(Base* CMD1, Base* CMD2);
-		string evaluate();
+		Or(Base* left, Base* right) : Operator(left, right) {};
+		bool evaluate();
 	}
 	```
 7. Semi
@@ -98,17 +95,40 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	``` C++
 	class Semi
 	{
-	private:
-		Base* command1;
-		Base* command2;
 	public:
-		Semi();
-		Semi(Base* CMD1, Base* CMD2);
-		string evaluate();
+		Semi(Base* left, Base* right) : Operator(left, right) {};
+		bool evaluate();
 	}
 	```
-
-
+8. Test
+   - Will execute test commands, returning false on failure
+	``` C++
+	class Test 
+	{
+	private: 
+		string flag = "-e";
+		string file;
+	public:
+		Test();
+		bool evaluate();
+	}
+	```
+9. ConstructTree
+	``` C++
+	class ConstructTree
+	{
+	private:
+		vector<char*> Param;
+		stack<Command*> CMD;
+		stack<Operator*> OP;
+	public:
+		ConstructTree(vector<char*> param);
+		void MakeTree();
+		stack<Command*> getCommands();
+		stack<Operator*> getOperators();
+	}
+	```
+	
 # Prototypes/Research:
 
 1. execvp will be used to run the commands 

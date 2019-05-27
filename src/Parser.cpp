@@ -105,8 +105,6 @@ vector<char*> Parser::ParseOperator()
 		Tokens.push_back(Stack.top());
 		Stack.pop();
 	}
-	for (int i = 0; i < Tokens.size(); i++)
-		cout << Tokens[i] << endl;
 	return Tokens;
 }
 

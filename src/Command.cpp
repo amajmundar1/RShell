@@ -16,7 +16,7 @@ bool Command::evaluate()
 {
 	if (empty == true)
 		return false;
-	if (strcmp(Input[0], "test") == 0)/* || (brackets)*/ {
+	if (strcmp(Input[0], "test") == 0) {
 		Test* test = new Test(Input);
 		return test->evaluate();
 	}

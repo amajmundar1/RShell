@@ -11,8 +11,6 @@
 class Test: public Command {
 	private: 
 		vector<char*> Input;
-		char* flag;
-		vector<char*> file;
 	public:
 		Test(vector<char*> input);
 		bool evaluate();

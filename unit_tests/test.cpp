@@ -339,8 +339,9 @@ TEST(MultCommand, parentheses) {
 		EXPECT_EQ(CMD1.top()->evaluate(), true);
 }
 
-TEST(SingleCommand, test) {
-	string input = "test /src/Add.cpp";
+TEST(SingleCommandTestSet, test1) 
+{
+	string input = "test src/Add.cpp";
 	Parser* parse = new Parser(input);
 	vector<char*> Input = parse->ParseOperator();
         ConstructTree* BuildTree = new ConstructTree(Input);
@@ -350,17 +351,23 @@ TEST(SingleCommand, test) {
                 EXPECT_EQ(OP.top()->evaluate(), true);
         else
                 EXPECT_EQ(CMD.top()->evaluate(), true);
-	string input2 = "test -e /src/Or.cpp";
-	Parser* parse2 = new Parser(input2);
-	vector<char*> Input2 = parse2->ParseOperator();
-        ConstructTree* BuildTree2 = new ConstructTree(Input2);
-        stack<Command*> CMD2 = BuildTree2->getCommands();
-        stack<Operator*> OP2 = BuildTree2->getOperators();
-        if (!OP2.empty())
-                EXPECT_EQ(OP2.top()->evaluate(), true);
+}
+TEST(SingleCommandTestSet, test2)
+{
+	string input = "test -e src/Or.cpp";
+	Parser* parse = new Parser(input);
+	vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
         else
-                EXPECT_EQ(CMD2.top()->evaluate(), true);
-	string input3 = "test -f /integration_tests/exit_command_test.sh";
+                EXPECT_EQ(CMD.top()->evaluate(), true);
+}
+TEST(SingleCommandTestSet, test3)
+{
+	string input3 = "test -f integration_tests/exit_command_tests.sh";
 	Parser* parse3 = new Parser(input3);
 	vector<char*> Input3 = parse3->ParseOperator();
         ConstructTree* BuildTree3 = new ConstructTree(Input3);
@@ -370,16 +377,19 @@ TEST(SingleCommand, test) {
                 EXPECT_EQ(OP3.top()->evaluate(), true);
         else
                 EXPECT_EQ(CMD3.top()->evaluate(), true);
-	string input4 = "test -d /header/";
-	Parser* parse4 = new Parser(input4);
-	vector<char*> Input4 = parse4->ParseOperator();
-        ConstructTree* BuildTree4 = new ConstructTree(Input4);
-        stack<Command*> CMD4 = BuildTree4->getCommands();
-        stack<Operator*> OP4 = BuildTree4->getOperators();
-        if (!OP4.empty())
-                EXPECT_EQ(OP4.top()->evaluate(), true);
+}
+TEST(SingleCommandTestSet, test4)
+{
+	string input = "test -d header/";
+	Parser* parse = new Parser(input);
+	vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
         else
-                EXPECT_EQ(CMD4.top()->evaluate(), true);
+                EXPECT_EQ(CMD.top()->evaluate(), true);
 }
 
 

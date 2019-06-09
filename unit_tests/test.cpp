@@ -18,6 +18,9 @@
 #include "../header/Semi.h"
 #include "../header/Test.h"
 #include "../header/ConstructTree.h"
+#include "../header/Redirect.h"
+//#include "../header/Pipe.h"
+
 
 using namespace std;
 
@@ -29,9 +32,9 @@ TEST(SingleCommand, Echo) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "echo hello";
 	Parser* parse1 = new Parser(input1);
@@ -40,9 +43,9 @@ TEST(SingleCommand, Echo) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 }
 
 TEST(SingleCommand, ls) {
@@ -53,9 +56,9 @@ TEST(SingleCommand, ls) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "ls -a";
 	Parser* parse1 = new Parser(input1);
@@ -64,9 +67,9 @@ TEST(SingleCommand, ls) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 
 	string input2 = "ls -l";
 	Parser* parse2 = new Parser(input2);
@@ -75,9 +78,9 @@ TEST(SingleCommand, ls) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), true);
+		EXPECT_EQ(OP2.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), true);
+		EXPECT_EQ(CMD2.top()->evaluate(0,1), true);
 }
 
 TEST(SingleCommand, Make_and_Remove) {
@@ -88,9 +91,9 @@ TEST(SingleCommand, Make_and_Remove) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "rm -r deleteThis";
 	Parser* parse1 = new Parser(input1);
@@ -99,9 +102,9 @@ TEST(SingleCommand, Make_and_Remove) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 }
 
 TEST(SingleCommand, cat) {
@@ -112,9 +115,9 @@ TEST(SingleCommand, cat) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 }
 
 TEST(SingleCommand, ps) {
@@ -125,9 +128,9 @@ TEST(SingleCommand, ps) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 }
 
 TEST(MultCommand, And) {
@@ -138,9 +141,9 @@ TEST(MultCommand, And) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "ls && ps";
 	Parser* parse1 = new Parser(input1);
@@ -149,9 +152,9 @@ TEST(MultCommand, And) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 
 	string input2 = "cat fakeFile && echo C";
 	Parser* parse2 = new Parser(input2);
@@ -160,9 +163,9 @@ TEST(MultCommand, And) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), false);
+		EXPECT_EQ(OP2.top()->evaluate(0,1), false);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), false);
+		EXPECT_EQ(CMD2.top()->evaluate(0,1), false);
 
 }
 
@@ -174,9 +177,9 @@ TEST(MultCommand, Or) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "ls || echo hello";
 	Parser* parse1 = new Parser(input1);
@@ -185,9 +188,9 @@ TEST(MultCommand, Or) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 
 	string input2 = "cat fakeFile || echo B";
 	Parser* parse2 = new Parser(input2);
@@ -196,9 +199,9 @@ TEST(MultCommand, Or) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), true);
+		EXPECT_EQ(OP2.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), true);
+		EXPECT_EQ(CMD2.top()->evaluate(0,1), true);
 }
 
 TEST(MultCommand, Semi) {
@@ -209,9 +212,9 @@ TEST(MultCommand, Semi) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "ls; ps";
 	Parser* parse1 = new Parser(input1);
@@ -220,9 +223,9 @@ TEST(MultCommand, Semi) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 
 	string input2 = "cat fakeFile; echo C; ls;";
 	Parser* parse2 = new Parser(input2);
@@ -231,9 +234,9 @@ TEST(MultCommand, Semi) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), true);
+		EXPECT_EQ(OP2.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), true);
+		EXPECT_EQ(CMD2.top()->evaluate(0,1), true);
 }
 
 TEST(MultCommand, Comment) {
@@ -246,9 +249,9 @@ TEST(MultCommand, Comment) {
 		stack<Command*> CMD = BuildTree->getCommands();
 		stack<Operator*> OP = BuildTree->getOperators();
 		if (!OP.empty())
-			EXPECT_EQ(OP.top()->evaluate(), true);
+			EXPECT_EQ(OP.top()->evaluate(0,1), true);
 		else
-			EXPECT_EQ(CMD.top()->evaluate(), true);
+			EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 	}
 
 	string input1 = "ls; ps && echo hello # comment";
@@ -260,9 +263,9 @@ TEST(MultCommand, Comment) {
 		stack<Command*> CMD1 = BuildTree1->getCommands();
 		stack<Operator*> OP1 = BuildTree1->getOperators();
 		if (!OP1.empty())
-			EXPECT_EQ(OP1.top()->evaluate(), true);
+			EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 		else
-			EXPECT_EQ(CMD1.top()->evaluate(), true);
+			EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 	}
 
 	string input2 = "ls -a #; ls -lR";
@@ -274,9 +277,9 @@ TEST(MultCommand, Comment) {
 		stack<Command*> CMD2 = BuildTree2->getCommands();
 		stack<Operator*> OP2 = BuildTree2->getOperators();
 		if (!OP2.empty())
-			EXPECT_EQ(OP2.top()->evaluate(), true);
+			EXPECT_EQ(OP2.top()->evaluate(0,1), true);
 		else
-			EXPECT_EQ(CMD2.top()->evaluate(), true);
+			EXPECT_EQ(CMD2.top()->evaluate(0,1), true);
 	}
 }
 
@@ -288,9 +291,9 @@ TEST(MultCommand, Combo) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "ls; ps && echo C";
 	Parser* parse1 = new Parser(input1);
@@ -299,9 +302,9 @@ TEST(MultCommand, Combo) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 
 	string input2 = "cat file || echo \"file does not exist\" && echo D; ls || ls -r";
 	Parser* parse2 = new Parser(input2);
@@ -310,9 +313,9 @@ TEST(MultCommand, Combo) {
 	stack<Command*> CMD2 = BuildTree2->getCommands();
 	stack<Operator*> OP2 = BuildTree2->getOperators();
 	if (!OP2.empty())
-		EXPECT_EQ(OP2.top()->evaluate(), true);
+		EXPECT_EQ(OP2.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD2.top()->evaluate(), true);
+		EXPECT_EQ(CMD2.top()->evaluate(0,1), true);
 }
 
 TEST(MultCommand, parentheses) {
@@ -323,9 +326,9 @@ TEST(MultCommand, parentheses) {
 	stack<Command*> CMD = BuildTree->getCommands();
 	stack<Operator*> OP = BuildTree->getOperators();
 	if (!OP.empty())
-		EXPECT_EQ(OP.top()->evaluate(), true);
+		EXPECT_EQ(OP.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD.top()->evaluate(), true);
+		EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 
 	string input1 = "(echo D; ls) && (mkdir temp && rm -r temp)";
 	Parser* parse1 = new Parser(input1);
@@ -334,9 +337,9 @@ TEST(MultCommand, parentheses) {
 	stack<Command*> CMD1 = BuildTree1->getCommands();
 	stack<Operator*> OP1 = BuildTree1->getOperators();
 	if (!OP1.empty())
-		EXPECT_EQ(OP1.top()->evaluate(), true);
+		EXPECT_EQ(OP1.top()->evaluate(0,1), true);
 	else
-		EXPECT_EQ(CMD1.top()->evaluate(), true);
+		EXPECT_EQ(CMD1.top()->evaluate(0,1), true);
 }
 
 TEST(SingleCommandTestSet, test1) 
@@ -348,9 +351,9 @@ TEST(SingleCommandTestSet, test1)
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
         if (!OP.empty())
-                EXPECT_EQ(OP.top()->evaluate(), true);
+                EXPECT_EQ(OP.top()->evaluate(0,1), true);
         else
-                EXPECT_EQ(CMD.top()->evaluate(), true);
+                EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 }
 TEST(SingleCommandTestSet, test2)
 {
@@ -361,9 +364,9 @@ TEST(SingleCommandTestSet, test2)
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
         if (!OP.empty())
-                EXPECT_EQ(OP.top()->evaluate(), true);
+                EXPECT_EQ(OP.top()->evaluate(0,1), true);
         else
-                EXPECT_EQ(CMD.top()->evaluate(), true);
+                EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 }
 TEST(SingleCommandTestSet, test3)
 {
@@ -374,9 +377,9 @@ TEST(SingleCommandTestSet, test3)
         stack<Command*> CMD3 = BuildTree3->getCommands();
         stack<Operator*> OP3 = BuildTree3->getOperators();
         if (!OP3.empty())
-                EXPECT_EQ(OP3.top()->evaluate(), true);
+                EXPECT_EQ(OP3.top()->evaluate(0,1), true);
         else
-                EXPECT_EQ(CMD3.top()->evaluate(), true);
+                EXPECT_EQ(CMD3.top()->evaluate(0,1), true);
 }
 TEST(SingleCommandTestSet, test4)
 {
@@ -387,11 +390,10 @@ TEST(SingleCommandTestSet, test4)
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
         if (!OP.empty())
-                EXPECT_EQ(OP.top()->evaluate(), true);
+                EXPECT_EQ(OP.top()->evaluate(0,1), true);
         else
-                EXPECT_EQ(CMD.top()->evaluate(), true);
+                EXPECT_EQ(CMD.top()->evaluate(0,1), true);
 }
-
 
 int main(int argc, char **argv) {
      ::testing::InitGoogleTest(&argc, argv);

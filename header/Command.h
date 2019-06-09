@@ -14,5 +14,5 @@ class Command : public Base
 		bool empty;
 	public:
 		Command(vector<char*> input);
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 };

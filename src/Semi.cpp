@@ -2,12 +2,12 @@
 
 using namespace std;
 
-bool Semi::evaluate() 
+bool Semi::evaluate(int Read, int Write) 
 {
 	if(Left != nullptr)
-		Left->evaluate();
+		Left->evaluate(Read, Write);
 	if(Right != nullptr)
-		return Right->evaluate();
+		return Right->evaluate(Read, Write);
 	return false;
 }
 

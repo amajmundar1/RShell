@@ -13,6 +13,10 @@ ADD_EXECUTABLE(rshell
     src/Command.cpp
     src/test.cpp
     src/ConstructTree.cpp
+    src/AppendOutput.cpp
+    src/RedirectInput.cpp
+    src/RedirectOutput.cpp
+    src/Pipe.cpp
 )
 
 ADD_EXECUTABLE(test
@@ -24,6 +28,10 @@ ADD_EXECUTABLE(test
     src/Command.cpp
     src/test.cpp
     src/ConstructTree.cpp
+    src/AppendOutput.cpp
+    src/RedirectInput.cpp
+    src/RedirectOutput.cpp
+    src/Pipe.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)

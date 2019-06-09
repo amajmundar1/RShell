@@ -8,7 +8,7 @@ Test::Test(vector<char*> input) : Command(input) {
 	Input = input;
 }
 
-bool Test::evaluate() {	
+bool Test::evaluate(int Read, int Write) {	
 	//return true;
 	struct stat testing;
 	int status = stat(Input[2], &testing);

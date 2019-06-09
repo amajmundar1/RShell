@@ -46,6 +46,14 @@ vector<char*> Parser::ParseOperator()
                                 {
                                         if (strlen(temp) > 0)
                                                 Tokens.push_back(strdup(temp));
+					if (!Stack.empty())
+					{
+						if ((strcmp(Stack.top(), "||") == 0) || (strcmp(Stack.top(), "&&") == 0) || (strcmp(Stack.top(), ";") == 0))
+						{
+							Tokens.push_back(Stack.top());
+							Stack.pop();
+						}
+					}
                                         Stack.push(strndup(&Input[i], 1));
                                         temp[0] = '\0';
 					if(Input[i+1] == ' ')
@@ -58,6 +66,14 @@ vector<char*> Parser::ParseOperator()
                                         {
                                                 if(strlen(temp) > 0)
                                                         Tokens.push_back(strdup(temp));
+						if (!Stack.empty())
+						{
+							if ((strcmp(Stack.top(), "||") == 0) || (strcmp(Stack.top(), "&&") == 0) || (strcmp(Stack.top(), ";") == 0))
+							{
+								Tokens.push_back(Stack.top());
+								Stack.pop();
+							}
+						}
                                                 Stack.push(strndup(&Input[i], 2));
                                                 temp[0] = '\0';
                                                 i++;
@@ -74,6 +90,14 @@ vector<char*> Parser::ParseOperator()
                                         {
                                                 if (strlen(temp) > 0)
                                                         Tokens.push_back(strdup(temp));
+						if (!Stack.empty())
+						{
+							if ((strcmp(Stack.top(), "||") == 0) || (strcmp(Stack.top(), "&&") == 0) || (strcmp(Stack.top(), ";") == 0))
+							{
+								Tokens.push_back(Stack.top());
+								Stack.pop();
+							}
+						}
                                                 Stack.push(strndup(&Input[i], 2));
                                                 temp[0] = '\0';
                                                 i++;
@@ -111,6 +135,7 @@ vector<char*> Parser::ParseOperator()
 
 vector<char*> Parser::ParseOperand()
 {
+	stack<char*> Stack;
 	vector<char*> Tokens;
 	char temp[999];
 	temp[0] = '\0';
@@ -147,5 +172,92 @@ vector<char*> Parser::ParseOperand()
 	}
 	if (strlen(temp) > 0)
 		Tokens.push_back(strdup(temp));
+	return Tokens;
+}
+
+vector<char*> Parser::ParsePipeRedirect()
+{
+	stack<char*> Stack;
+	vector<char*> Tokens;
+	char temp[999];
+	temp[0] = '\0';
+	for(int i = 0; Input[i] != '\0'; i++)
+	{
+		switch(Input[i])
+		{
+			case '|':
+				{
+					if(strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					temp[0] = '\0';
+					if (!Stack.empty())
+					{
+						if ((strcmp(Stack.top(), "|") == 0) || (strcmp(Stack.top(), "<") == 0) || (strcmp(Stack.top(), ">") == 0) || (strcmp(Stack.top(), ">>") == 0))
+						{
+							Tokens.push_back(Stack.top());
+							Stack.pop();
+						}
+					}
+					Stack.push(strndup(&Input[i], 1));
+					if(Input[i+1] == ' ')
+						i++;
+				}
+				break;
+			case '<':
+				{
+					if (strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					temp[0] = '\0';
+					if (!Stack.empty())
+					{
+						if ((strcmp(Stack.top(), "|") == 0) || (strcmp(Stack.top(), "<") == 0) || (strcmp(Stack.top(), ">") == 0) || (strcmp(Stack.top(), ">>") == 0))
+						{
+							Tokens.push_back(Stack.top());
+							Stack.pop();
+						}
+					}
+					Stack.push(strndup(&Input[i], 1));
+					if(Input[i+1] == ' ')
+						i++;
+				}
+				break;
+			case '>':
+				{
+					if (strlen(temp) > 0)
+						Tokens.push_back(strdup(temp));
+					temp[0] = '\0';
+					if (!Stack.empty())
+					{
+						if ((strcmp(Stack.top(), "|") == 0) || (strcmp(Stack.top(), "<") == 0) || (strcmp(Stack.top(), ">") == 0) || (strcmp(Stack.top(), ">>") == 0))
+						{
+							Tokens.push_back(Stack.top());
+							Stack.pop();
+						}
+					}
+					if (strcmp(&Input[i+1], ">") == 0)
+					{
+						Stack.push(strndup(&Input[i], 2));
+						i++;
+					}
+					else
+						Stack.push(strndup(&Input[i], 1));
+					if(Input[i+1] == ' ')
+						i++;
+				}
+				break;
+			default:
+				{
+					strncat(temp, &Input[i], 1);
+				}
+				break;
+		}
+	}
+	if (strlen(temp) > 0)
+		Tokens.push_back(strdup(temp));
+	while (!Stack.empty())
+	{
+		Tokens.push_back(Stack.top());
+		Stack.pop();
+	}
 	return Tokens;
 }

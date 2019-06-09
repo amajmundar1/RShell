@@ -262,6 +262,36 @@ src/Add.cpp.s:
 	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Add.cpp.s
 .PHONY : src/Add.cpp.s
 
+src/AppendOutput.o: src/AppendOutput.cpp.o
+
+.PHONY : src/AppendOutput.o
+
+# target to build an object file
+src/AppendOutput.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/AppendOutput.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/AppendOutput.cpp.o
+.PHONY : src/AppendOutput.cpp.o
+
+src/AppendOutput.i: src/AppendOutput.cpp.i
+
+.PHONY : src/AppendOutput.i
+
+# target to preprocess a source file
+src/AppendOutput.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/AppendOutput.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/AppendOutput.cpp.i
+.PHONY : src/AppendOutput.cpp.i
+
+src/AppendOutput.s: src/AppendOutput.cpp.s
+
+.PHONY : src/AppendOutput.s
+
+# target to generate assembly for a file
+src/AppendOutput.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/AppendOutput.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/AppendOutput.cpp.s
+.PHONY : src/AppendOutput.cpp.s
+
 src/Command.o: src/Command.cpp.o
 
 .PHONY : src/Command.o
@@ -381,6 +411,96 @@ src/Parser.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Parser.cpp.s
 	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Parser.cpp.s
 .PHONY : src/Parser.cpp.s
+
+src/Pipe.o: src/Pipe.cpp.o
+
+.PHONY : src/Pipe.o
+
+# target to build an object file
+src/Pipe.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Pipe.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Pipe.cpp.o
+.PHONY : src/Pipe.cpp.o
+
+src/Pipe.i: src/Pipe.cpp.i
+
+.PHONY : src/Pipe.i
+
+# target to preprocess a source file
+src/Pipe.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Pipe.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Pipe.cpp.i
+.PHONY : src/Pipe.cpp.i
+
+src/Pipe.s: src/Pipe.cpp.s
+
+.PHONY : src/Pipe.s
+
+# target to generate assembly for a file
+src/Pipe.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Pipe.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Pipe.cpp.s
+.PHONY : src/Pipe.cpp.s
+
+src/RedirectInput.o: src/RedirectInput.cpp.o
+
+.PHONY : src/RedirectInput.o
+
+# target to build an object file
+src/RedirectInput.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectInput.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectInput.cpp.o
+.PHONY : src/RedirectInput.cpp.o
+
+src/RedirectInput.i: src/RedirectInput.cpp.i
+
+.PHONY : src/RedirectInput.i
+
+# target to preprocess a source file
+src/RedirectInput.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectInput.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectInput.cpp.i
+.PHONY : src/RedirectInput.cpp.i
+
+src/RedirectInput.s: src/RedirectInput.cpp.s
+
+.PHONY : src/RedirectInput.s
+
+# target to generate assembly for a file
+src/RedirectInput.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectInput.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectInput.cpp.s
+.PHONY : src/RedirectInput.cpp.s
+
+src/RedirectOutput.o: src/RedirectOutput.cpp.o
+
+.PHONY : src/RedirectOutput.o
+
+# target to build an object file
+src/RedirectOutput.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectOutput.cpp.o
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectOutput.cpp.o
+.PHONY : src/RedirectOutput.cpp.o
+
+src/RedirectOutput.i: src/RedirectOutput.cpp.i
+
+.PHONY : src/RedirectOutput.i
+
+# target to preprocess a source file
+src/RedirectOutput.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectOutput.cpp.i
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectOutput.cpp.i
+.PHONY : src/RedirectOutput.cpp.i
+
+src/RedirectOutput.s: src/RedirectOutput.cpp.s
+
+.PHONY : src/RedirectOutput.s
+
+# target to generate assembly for a file
+src/RedirectOutput.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RedirectOutput.cpp.s
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/RedirectOutput.cpp.s
+.PHONY : src/RedirectOutput.cpp.s
 
 src/Semi.o: src/Semi.cpp.o
 
@@ -517,6 +637,9 @@ help:
 	@echo "... src/Add.o"
 	@echo "... src/Add.i"
 	@echo "... src/Add.s"
+	@echo "... src/AppendOutput.o"
+	@echo "... src/AppendOutput.i"
+	@echo "... src/AppendOutput.s"
 	@echo "... src/Command.o"
 	@echo "... src/Command.i"
 	@echo "... src/Command.s"
@@ -529,6 +652,15 @@ help:
 	@echo "... src/Parser.o"
 	@echo "... src/Parser.i"
 	@echo "... src/Parser.s"
+	@echo "... src/Pipe.o"
+	@echo "... src/Pipe.i"
+	@echo "... src/Pipe.s"
+	@echo "... src/RedirectInput.o"
+	@echo "... src/RedirectInput.i"
+	@echo "... src/RedirectInput.s"
+	@echo "... src/RedirectOutput.o"
+	@echo "... src/RedirectOutput.i"
+	@echo "... src/RedirectOutput.s"
 	@echo "... src/Semi.o"
 	@echo "... src/Semi.i"
 	@echo "... src/Semi.s"

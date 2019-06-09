@@ -13,7 +13,7 @@ class Test: public Command {
 		vector<char*> Input;
 	public:
 		Test(vector<char*> input);
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 };
 
 #endif

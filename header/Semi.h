@@ -5,6 +5,6 @@
 class Semi: public Operator {
 	public:
 		Semi(Base* left, Base* right) : Operator(left, right) {};
-        	bool evaluate();
+        	bool evaluate(int Read, int Write);
 };
 

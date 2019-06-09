@@ -15,4 +15,5 @@ public:
 	Parser(char* input);
 	vector<char*> ParseOperator();
 	vector<char*> ParseOperand();
+	vector<char*> ParsePipeRedirect();
 };

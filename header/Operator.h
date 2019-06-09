@@ -9,5 +9,5 @@ protected:
 public:
 	Operator(): Left(NULL), Right(NULL) {};
         Operator(Base* left, Base* right): Left(left), Right(right) {};
-        virtual bool evaluate() = 0;
+        virtual bool evaluate(int Read, int Write) = 0;
 };

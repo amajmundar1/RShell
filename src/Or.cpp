@@ -3,10 +3,10 @@
 
 using namespace std;
 
-bool Or::evaluate() {
-	if(Left->evaluate())
+bool Or::evaluate(int Read, int Write) {
+	if(Left->evaluate(Read, Write))
 		return true;
-	else if (Right->evaluate())
+	else if (Right->evaluate(Read, Write))
 		return true;
 	else
 		return false;

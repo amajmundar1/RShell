@@ -6,5 +6,5 @@ class Or: public Operator {
 	public:
 		Or();
 		Or(Base* left, Base* right) : Operator(left, right) {};
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 };

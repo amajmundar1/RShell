@@ -6,5 +6,5 @@ using namespace std;
 
 class Base {
 public:
-	virtual bool evaluate() = 0;
+	virtual bool evaluate(int Read, int Write) = 0;
 };

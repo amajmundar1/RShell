@@ -392,6 +392,70 @@ TEST(SingleCommandTestSet, test4)
                 EXPECT_EQ(CMD.top()->evaluate(), true);
 }
 
+TEST(SingleCommandTestSet, Pipe)
+{
+        string input = "cat names.txt | wc";
+        Parser* parse = new Parser(input);
+        vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(), true);
+}
+
+TEST(SingleCommand, Input) {
+        string input = "grep a < names.txt";
+        Parser* parse = new Parser(input);
+        vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(), true);
+}
+
+TEST(SingleCommand, Output) {
+        string input = "ls > temp.cpp";
+        Parser* parse = new Parser(input);
+        vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(), true);
+	
+        string input1 = "ls -r >> temp.cpp";
+        Parser* parse1 = new Parser(input1);
+        vector<char*> Input1 = parse1->ParseOperator();
+        ConstructTree* BuildTree1 = new ConstructTree(Input1);
+        stack<Command*> CMD1 = BuildTree1->getCommands();
+        stack<Operator*> OP1 = BuildTree1->getOperators();
+        if (!OP1.empty())
+                EXPECT_EQ(OP1.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD1.top()->evaluate(), true);
+}
+
+TEST(MultCommand, Example4)
+{
+	string input = "echo abcdefghijklmnopqrstuvwxyz | tr A-Z a-z | tee newOutputFile1.h | tr a-z A-Z > newOutputFile2.h";
+        Parser* parse = new Parser(input);
+        vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(), true);
+}
 
 int main(int argc, char **argv) {
      ::testing::InitGoogleTest(&argc, argv);

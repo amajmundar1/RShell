@@ -7,7 +7,10 @@ bool RedirectInput::evaluate(int Read, int Write)
 
 	if(File != NULL)
 	{
-		if((Read = open(File, O_RDONLY)) == -1)
+		cout << File << endl;
+		Read = open(File, O_RDONLY);
+		cout << Read << endl;
+		if(Read == -1)
 		{
 			perror("File Could not be Opened");
 			return false;

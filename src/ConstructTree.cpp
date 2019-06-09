@@ -170,7 +170,7 @@ void ConstructTree::MakeTree()
 							RD.push(new RedirectInput(OP.top(), check_pipe_redirect[k-1]));
 							OP.pop();
 						}
-						else if ((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
+						else if((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
 						{
 							Redirect* temp = new RedirectInput(RD.top(), check_pipe_redirect[k-1]);
 							RD.pop();
@@ -189,7 +189,7 @@ void ConstructTree::MakeTree()
 							RD.push(new RedirectOutput(OP.top(), check_pipe_redirect[k-1]));
 							OP.pop();
 						}
-						else if ((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
+						else if((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
 						{
 							Redirect* temp = new RedirectOutput(RD.top(), check_pipe_redirect[k-1]);
 							RD.pop();
@@ -197,6 +197,7 @@ void ConstructTree::MakeTree()
 						}
 						else
 						{
+							//cout << "Hit >" << endl;
 							RD.push(new RedirectOutput(CMD.top(), check_pipe_redirect[k-1]));
 							CMD.pop();
 						}
@@ -208,7 +209,7 @@ void ConstructTree::MakeTree()
 							RD.push(new AppendOutput(OP.top(), check_pipe_redirect[k-1]));
 							OP.pop();
 						}
-						else if ((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
+						else if((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
 						{
 							Redirect* temp = new AppendOutput(RD.top(), check_pipe_redirect[k-1]);
 							RD.pop();
@@ -222,14 +223,14 @@ void ConstructTree::MakeTree()
 					}
 					else if (strcmp(check_pipe_redirect[k], "|") == 0)
 					{
-						cout << "Inside Pipe" << endl;
 						if ((k > 2) && (strcmp(check_pipe_redirect[k-2], "|") == 0))
 						{
-							OP.push(new Pipe(OP.top(), CMD.top()));
+							Operator* temp = OP.top();
 							OP.pop();
+							OP.push(new Pipe(temp, CMD.top()));
 							CMD.pop();
 						}
-						else if ((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
+						else if((k > 2) && ((strcmp(check_pipe_redirect[k-2], "<") == 0) || (strcmp(check_pipe_redirect[k-2], ">") == 0) || (strcmp(check_pipe_redirect[k-2], ">>") == 0)))
 						{
 							OP.push(new Pipe(RD.top(), CMD.top()));
 							CMD.pop();
@@ -237,7 +238,6 @@ void ConstructTree::MakeTree()
 						}
 						else
 						{
-							cout << "Inside else pipe" << endl;
 							Command* right = CMD.top();
 							CMD.pop();
 							Command* left = CMD.top();
@@ -247,8 +247,8 @@ void ConstructTree::MakeTree()
 					}
 					else
 					{
-						if ((strcmp(check_pipe_redirect[k+1], "<") == 0) || (strcmp(check_pipe_redirect[k+1], ">") == 0) || (strcmp(check_pipe_redirect[k+1], ">>") == 0))
-							k++;
+						if ((strcmp(check_pipe_redirect[k+1], "<") == 0) || (strcmp(check_pipe_redirect[k+1], ">") == 0) || (strcmp(check_pipe_redirect[k+1], ">>") == 0));
+							
 						else
 						{
 							Parser* newParser1 = new Parser(check_pipe_redirect[k]);

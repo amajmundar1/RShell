@@ -234,7 +234,7 @@ vector<char*> Parser::ParsePipeRedirect()
 							Stack.pop();
 						}
 					}
-					if (strcmp(&Input[i+1], ">") == 0)
+					if (Input[i+1] == '>')
 					{
 						Stack.push(strndup(&Input[i], 2));
 						i++;

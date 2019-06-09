@@ -416,8 +416,11 @@ TEST(SingleCommand, Input) {
         ConstructTree* BuildTree = new ConstructTree(Input);
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
+	stack<Redirect*> RD = BuildTree->getRedirect();
         if (!OP.empty())
                 EXPECT_EQ(OP.top()->evaluate(0, 1), true);
+	else if(!RD.empty())
+		EXPECT_EQ(RD.top()->evaluate(0,1), true);
         else
                 EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
 }
@@ -429,8 +432,11 @@ TEST(SingleCommand, Output) {
         ConstructTree* BuildTree = new ConstructTree(Input);
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
+	stack<Redirect*> RD = BuildTree->getRedirect();
         if (!OP.empty())
                 EXPECT_EQ(OP.top()->evaluate(0, 1), true);
+	else if(!RD.empty())
+		EXPECT_EQ(RD.top()->evaluate(0,1), true);
         else
                 EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
 	
@@ -440,8 +446,11 @@ TEST(SingleCommand, Output) {
         ConstructTree* BuildTree1 = new ConstructTree(Input1);
         stack<Command*> CMD1 = BuildTree1->getCommands();
         stack<Operator*> OP1 = BuildTree1->getOperators();
+	stack<Redirect*> RD1 = BuildTree->getRedirect();
         if (!OP1.empty())
                 EXPECT_EQ(OP1.top()->evaluate(0, 1), true);
+	else if(!RD1.empty())
+		EXPECT_EQ(RD1.top()->evaluate(0,1), true);
         else
                 EXPECT_EQ(CMD1.top()->evaluate(0, 1), true);
 }
@@ -454,8 +463,11 @@ TEST(MultCommand, Example4)
         ConstructTree* BuildTree = new ConstructTree(Input);
         stack<Command*> CMD = BuildTree->getCommands();
         stack<Operator*> OP = BuildTree->getOperators();
+	stack<Redirect*> RD = BuildTree->getRedirect();
         if (!OP.empty())
                 EXPECT_EQ(OP.top()->evaluate(0, 1), true);
+	else if(!RD.empty())
+		EXPECT_EQ(RD.top()->evaluate(0,1), true);
         else
                 EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
 }

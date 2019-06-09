@@ -40,3 +40,8 @@ CMakeFiles
 
 #Visual Studio Files
 .vscode/
+
+#Test Files
+newOutputFile1.h
+newOutputFile2.h
+temp.cpp

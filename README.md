@@ -1,5 +1,5 @@
 # CS 100 RShell
-Winter 2019  
+Spring 2019  
 Abdullah Majmundar - 861233763  
 Emily Dixon - 862051249
 
@@ -7,14 +7,13 @@ Emily Dixon - 862051249
 
 The goal of this program is to replicate the functionality of an RSHELL to a limited extent. It will be able to execute basic commands and use the "&&", "||", and ";" operators.
 
-The input will be read as a string and then tokenized based on operators first. It will be fitted into an expression tree and evaluated according to the rules described in the Add, Or, and Semi classes.
+The input will first be read as a string and then tokenized based on operators. It will be fitted into an expression tree and evaluated according to the rules described in the Add, Or, and Semi classes.
 
-The evaluation process will call Parser once again and this time tokenize based on white space (Seperating words)
+The evaluation process will call Parser once again and this time tokenize based on white space (Seperating words).
 
-The vecor will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check that the rest of the string matches the syntax of the command. Then it will execute. If it does not, it will return an error message based on where it fails.
+The vector will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check that the rest of the string matches the syntax of the command, then it will execute. If it does not, it will return an error message based on where it fails.
 
 # Diagram:
-
 ![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram1.png)
 
 # Classes:
@@ -31,6 +30,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 		Parser(char* input);
 		vector<char*> ParseOperator();
 		vector<char*> ParseOperand();
+		vector<char*> ParsePipeRedirect();
 	}
 	```
 2. Base
@@ -39,7 +39,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	class Base
 	{
 	public:
-		virtual bool evaluate() = 0;
+		virtual bool evaluate(int Read, int Write) = 0;
 	}
 	```
 3. Command
@@ -52,7 +52,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 		bool empty;
 	public:
 		Command(vector<char*> input);
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 	}
 	```
 4. Operator
@@ -66,7 +66,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	public:
 		Operator(): Left(NULL), Right(NULL) {};
         	Operator(Base* left, Base* right): Left(left), Right(right) {};
-		virtual bool evaluate() = 0;
+		virtual bool evaluate(int Read, int Write) = 0;
 	}
 	```
 5. Add
@@ -76,7 +76,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	{
 	public:
 		Add(Base* left, Base* right) : Operator(left, right) {};
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 	}
 	```
 6. Or
@@ -87,7 +87,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	public:
 		Or();
 		Or(Base* left, Base* right) : Operator(left, right) {};
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 	}
 	```
 7. Semi
@@ -97,7 +97,7 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	{
 	public:
 		Semi(Base* left, Base* right) : Operator(left, right) {};
-		bool evaluate();
+		bool evaluate(int Read, int Write);
 	}
 	```
 8. Test
@@ -106,11 +106,10 @@ The vecor will then be fed into the Evaluate class where the first string will b
 	class Test 
 	{
 	private: 
-		string flag = "-e";
-		string file;
+		vector<char*> Input;
 	public:
-		Test();
-		bool evaluate();
+		Test(vector<char*> input);
+		bool evaluate(int Read, int Write);
 	}
 	```
 9. ConstructTree
@@ -121,11 +120,64 @@ The vecor will then be fed into the Evaluate class where the first string will b
 		vector<char*> Param;
 		stack<Command*> CMD;
 		stack<Operator*> OP;
+		stack<Redirect*> RD;
 	public:
 		ConstructTree(vector<char*> param);
 		void MakeTree();
 		stack<Command*> getCommands();
 		stack<Operator*> getOperators();
+		stack<Redirect*> getRedirect();
+	}
+	```
+10. Redirect
+	``` C++
+	class Redirect
+	{
+	protected:
+		Base* Command;
+		char* File;
+	public:
+		Redirect(Base* command, char* file) : Command(command), File(file) {}
+		virtual bool evaluate(int Read, int Write) = 0;
+	}
+	```
+11. RedirectInput
+   - Will execute comman from within the designated file
+	``` C++
+	class RedirectInput
+	{
+	public:
+		RedirectInput(Base* command, char* file) : Redirect(command, file) {}
+		bool evaluate(int Read, int Write);
+	}
+	```
+12. RedirectOutput
+   - Will execute command, rewriting the ouput of it onto the designated file
+	``` C++
+	class RedirectOutput
+	{
+	public:
+		RedirectOutput(Base* command, char* file) : Redirect(command, file) {}
+		bool evaluate(int Read, int Write);
+	}
+	```
+13. AppendOutput
+   - Will execute command, appending the ouput of it to the designated file
+	``` C++
+	class AppendOutput
+	{
+	public:
+		AppendOutput(Base* command, char* file) : Redirect(command, file) {}
+		bool evaluate(int Read, int Write);
+	}
+	```
+14. Pipe
+	``` C++
+	class Pipe
+	{
+	public:
+		Pipe(Base* Left, Base* Right) : Operator(Left, Right) {}
+		bool evaluate(int Read, int Write);
 	}
 	```
 	

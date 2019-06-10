@@ -14,7 +14,7 @@ The evaluation process will call Parser once again and this time tokenize based 
 The vector will then be fed into the Evaluate class where the first string will be checked for validity. If found, it will contiue to check that the rest of the string matches the syntax of the command, then it will execute. If it does not, it will return an error message based on where it fails.
 
 # Diagram:
-![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram1.png)
+![UML Diagram](https://github.com/cs100/spring-2019-assignment-cs100-abdullah-emily/blob/master/IMAGES/UML%20Diagram3.png)
 
 # Classes:
 

@@ -152,7 +152,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 12. RedirectOutput
-   - Will execute command, rewriting the ouput of it onto the designated file
+    - Will execute command, rewriting the ouput of it onto the designated file
         ``` C++
 	class RedirectOutput
 	{

@@ -101,11 +101,11 @@ vector<char*> Parser::ParseOperator()
                                                 Stack.push(strndup(&Input[i], 2));
                                                 temp[0] = '\0';
                                                 i++;
+						if(Input[i+1] == ' ')
+                                                	i++;
                                         }
                                         else
                                                 strncat(temp, &Input[i], 1);
-					if(Input[i+1] == ' ')
-                                                i++;
                                 }
                                 break;
 			case '#':

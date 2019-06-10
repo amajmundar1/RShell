@@ -9,19 +9,24 @@ ConstructTree::ConstructTree(vector<char*> param)
 
 void ConstructTree::MakeTree()
 {
+	bool checkRedirect = false;
 	for(int i = 0; i < Param.size(); i++)
 	{
+		vector<char*> check_pipe_redirect;
+		cout << Param[i] << endl;
 		if(strcmp(Param[i] , "&&") == 0)
 		{
+			cout << "In And " << endl;
 			if (CMD.empty())
 			{
+				cout << "In And CMD Empty" << endl;
 				Operator* right = OP.top();
 				OP.pop();
 				Operator* left = OP.top();
 				OP.push(right);
 				OP.push(new Add(left, right));
 			}
-			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0) && checkRedirect == false)
 			{
 				if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
 				{
@@ -38,6 +43,69 @@ void ConstructTree::MakeTree()
 					CMD.pop();
 					OP.push(new Add(left, right));
 				}
+			}
+			else if (checkRedirect == true)
+			{
+				cout << "Hit" << endl;
+				int size = check_pipe_redirect.size() - 1;
+				if(CMD.empty() && OP.empty() && !RD.empty())
+				{
+					Redirect* right = RD.top();
+					RD.pop();
+					Redirect* left = RD.top();
+					RD.pop();
+					OP.push(new Add(left, right));
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") != 0))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Add(left, RD.top()));
+					RD.pop();
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") == 0))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Add(RD.top(), right));
+					RD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") == string::npos) || (string(Param[i-1]).find(">") == string::npos)))
+				{
+					OP.push(new Add(RD.top(), CMD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") != string::npos) || (string(Param[i-1]).find(">") != string::npos)))
+				{
+					OP.push(new Add(CMD.top(), RD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") == string::npos))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Add(left, CMD.top()));
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") != string::npos))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Add(CMD.top(), right));
+					CMD.pop();
+				}
+				else if(CMD.empty() && RD.empty() && !OP.empty())
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Add(left, right));
+				}
+				else;
+				checkRedirect = false;
 			}
 			else
 			{
@@ -68,7 +136,7 @@ void ConstructTree::MakeTree()
 				OP.push(right);
 				OP.push(new Or(left, right));
 			}
-			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0) && checkRedirect == false)
 			{
 				if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
 				{
@@ -86,6 +154,69 @@ void ConstructTree::MakeTree()
 					OP.push(new Or(left, right));
 
 				}
+			}
+			else if (checkRedirect == true)
+			{
+				cout << "Hit" << endl;
+				int size = check_pipe_redirect.size() - 1;
+				if(CMD.empty() && OP.empty() && !RD.empty())
+				{
+					Redirect* right = RD.top();
+					RD.pop();
+					Redirect* left = RD.top();
+					RD.pop();
+					OP.push(new Or(left, right));
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") != 0))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Or(left, RD.top()));
+					RD.pop();
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") == 0))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Or(RD.top(), right));
+					RD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") == string::npos) || (string(Param[i-1]).find(">") == string::npos)))
+				{
+					OP.push(new Or(RD.top(), CMD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") != string::npos) || (string(Param[i-1]).find(">") != string::npos)))
+				{
+					OP.push(new Or(CMD.top(), RD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") == string::npos))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Or(left, CMD.top()));
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") != string::npos))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Or(CMD.top(), right));
+					CMD.pop();
+				}
+				else if(CMD.empty() && RD.empty() && !OP.empty())
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Or(left, right));
+				}
+				else;
+				checkRedirect = false;
 			}
 			else
 			{
@@ -116,7 +247,7 @@ void ConstructTree::MakeTree()
 				OP.push(right);
 				OP.push(new Semi(left, right));
 			}
-			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0))
+			else if ((strcmp(Param[i-1], "&&") != 0) && (strcmp(Param[i-1], "||") != 0) && (strcmp(Param[i-1], ";") != 0) && checkRedirect == false)
 			{
 				if ((strcmp(Param[i-2], "&&") != 0) && (strcmp(Param[i-2], "||") != 0) && (strcmp(Param[i-2], ";") != 0))
 				{
@@ -134,6 +265,69 @@ void ConstructTree::MakeTree()
 					OP.push(new Semi(left, right));
 
 				}
+			}
+			else if (checkRedirect == true)
+			{
+				cout << "Hit" << endl;
+				int size = check_pipe_redirect.size() - 1;
+				if(CMD.empty() && OP.empty() && !RD.empty())
+				{
+					Redirect* right = RD.top();
+					RD.pop();
+					Redirect* left = RD.top();
+					RD.pop();
+					OP.push(new Semi(left, right));
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") != 0))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Semi(left, RD.top()));
+					RD.pop();
+				}
+				else if(CMD.empty() && !OP.empty() && !RD.empty() && (strcmp(check_pipe_redirect[size], "|") == 0))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Semi(RD.top(), right));
+					RD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") == string::npos) || (string(Param[i-1]).find(">") == string::npos)))
+				{
+					OP.push(new Semi(RD.top(), CMD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && !RD.empty() && OP.empty() && ((string(Param[i-1]).find("<") != string::npos) || (string(Param[i-1]).find(">") != string::npos)))
+				{
+					OP.push(new Semi(CMD.top(), RD.top()));
+					RD.pop();
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") == string::npos))
+				{
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Semi(left, CMD.top()));
+					CMD.pop();
+				}
+				else if(!CMD.empty() && RD.empty() && !OP.empty() && (string(Param[i-1]).find("|") != string::npos))
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					OP.push(new Semi(CMD.top(), right));
+					CMD.pop();
+				}
+				else if(CMD.empty() && RD.empty() && !OP.empty())
+				{
+					Operator* right = OP.top();
+					OP.pop();
+					Operator* left = OP.top();
+					OP.pop();
+					OP.push(new Semi(left, right));
+				}
+				else;
+				checkRedirect = false;
 			}
 			else
 			{
@@ -157,9 +351,10 @@ void ConstructTree::MakeTree()
 		else
 		{
 			Parser* sub_parse = new Parser(Param[i]);
-			vector<char*> check_pipe_redirect = sub_parse->ParsePipeRedirect();
+			check_pipe_redirect = sub_parse->ParsePipeRedirect();
 			if(check_pipe_redirect.size() > 1)
 			{
+				checkRedirect = true;
 				for(int k = 0; k < check_pipe_redirect.size(); k++)
 				{
 					cout << check_pipe_redirect[k] << endl;
@@ -197,7 +392,6 @@ void ConstructTree::MakeTree()
 						}
 						else
 						{
-							//cout << "Hit >" << endl;
 							RD.push(new RedirectOutput(CMD.top(), check_pipe_redirect[k-1]));
 							CMD.pop();
 						}

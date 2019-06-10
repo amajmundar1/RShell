@@ -409,7 +409,7 @@ TEST(SingleCommandTestSet, Pipe)
                 EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
 }
 
-TEST(SingleCommand, Input) {
+TEST(SingleCommandTestSet, RedirectInput) {
         string input = "grep a < names.txt";
         Parser* parse = new Parser(input);
         vector<char*> Input = parse->ParseOperator();
@@ -425,7 +425,7 @@ TEST(SingleCommand, Input) {
                 EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
 }
 
-TEST(SingleCommand, Output) {
+TEST(SingleCommandTestSet, RedirectOutput) {
         string input = "ls > temp.cpp";
         Parser* parse = new Parser(input);
         vector<char*> Input = parse->ParseOperator();
@@ -455,9 +455,26 @@ TEST(SingleCommand, Output) {
                 EXPECT_EQ(CMD1.top()->evaluate(0, 1), true);
 }
 
-TEST(MultCommand, Example4)
+TEST(MultCommandTestSet, Example4)
 {
 	string input = "echo abcdefghijklmnopqrstuvwxyz | tr A-Z a-z | tee newOutputFile1.h | tr a-z A-Z > newOutputFile2.h";
+        Parser* parse = new Parser(input);
+        vector<char*> Input = parse->ParseOperator();
+        ConstructTree* BuildTree = new ConstructTree(Input);
+        stack<Command*> CMD = BuildTree->getCommands();
+        stack<Operator*> OP = BuildTree->getOperators();
+	stack<Redirect*> RD = BuildTree->getRedirect();
+        if (!OP.empty())
+                EXPECT_EQ(OP.top()->evaluate(0, 1), true);
+	else if(!RD.empty())
+		EXPECT_EQ(RD.top()->evaluate(0,1), true);
+        else
+                EXPECT_EQ(CMD.top()->evaluate(0, 1), true);
+}
+
+TEST(MultCommandTestSet, RedirectParen)
+{
+	string input = "(la || ls) && cat < old.txt";
         Parser* parse = new Parser(input);
         vector<char*> Input = parse->ParseOperator();
         ConstructTree* BuildTree = new ConstructTree(Input);

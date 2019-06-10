@@ -10,16 +10,13 @@ ConstructTree::ConstructTree(vector<char*> param)
 void ConstructTree::MakeTree()
 {
 	bool checkRedirect = false;
+	vector<char*> check_pipe_redirect;
 	for(int i = 0; i < Param.size(); i++)
 	{
-		vector<char*> check_pipe_redirect;
-		cout << Param[i] << endl;
 		if(strcmp(Param[i] , "&&") == 0)
 		{
-			cout << "In And " << endl;
-			if (CMD.empty())
+			if (CMD.empty() && checkRedirect == false)
 			{
-				cout << "In And CMD Empty" << endl;
 				Operator* right = OP.top();
 				OP.pop();
 				Operator* left = OP.top();
@@ -46,7 +43,6 @@ void ConstructTree::MakeTree()
 			}
 			else if (checkRedirect == true)
 			{
-				cout << "Hit" << endl;
 				int size = check_pipe_redirect.size() - 1;
 				if(CMD.empty() && OP.empty() && !RD.empty())
 				{
@@ -157,7 +153,6 @@ void ConstructTree::MakeTree()
 			}
 			else if (checkRedirect == true)
 			{
-				cout << "Hit" << endl;
 				int size = check_pipe_redirect.size() - 1;
 				if(CMD.empty() && OP.empty() && !RD.empty())
 				{
@@ -268,7 +263,6 @@ void ConstructTree::MakeTree()
 			}
 			else if (checkRedirect == true)
 			{
-				cout << "Hit" << endl;
 				int size = check_pipe_redirect.size() - 1;
 				if(CMD.empty() && OP.empty() && !RD.empty())
 				{
@@ -357,7 +351,6 @@ void ConstructTree::MakeTree()
 				checkRedirect = true;
 				for(int k = 0; k < check_pipe_redirect.size(); k++)
 				{
-					cout << check_pipe_redirect[k] << endl;
 					if(strcmp(check_pipe_redirect[k], "<") == 0)
 					{
 						if ((k > 2) && (strcmp(check_pipe_redirect[k-2], "|") == 0))

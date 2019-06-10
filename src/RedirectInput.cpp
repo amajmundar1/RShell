@@ -7,9 +7,9 @@ bool RedirectInput::evaluate(int Read, int Write)
 
 	if(File != NULL)
 	{
-		cout << File << endl;
+		if (File[strlen(File) -1] == ' ')
+			File[strlen(File) -1] = '\0';
 		Read = open(File, O_RDONLY);
-		cout << Read << endl;
 		if(Read == -1)
 		{
 			perror("File Could not be Opened");

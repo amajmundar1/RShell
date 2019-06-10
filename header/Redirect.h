@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include <fcntl.h>
+#include <cstring>
 #include <sys/types.h>
 
 class Redirect : public Base

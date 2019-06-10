@@ -142,8 +142,8 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 11. RedirectInput
-   - Will execute comman from within the designated file
-	``` C++
+    - Will execute command from within the designated file
+   	``` C++
 	class RedirectInput
 	{
 	public:
@@ -153,7 +153,7 @@ The vector will then be fed into the Evaluate class where the first string will 
 	```
 12. RedirectOutput
    - Will execute command, rewriting the ouput of it onto the designated file
-	``` C++
+        ``` C++
 	class RedirectOutput
 	{
 	public:
@@ -162,8 +162,8 @@ The vector will then be fed into the Evaluate class where the first string will 
 	}
 	```
 13. AppendOutput
-   - Will execute command, appending the ouput of it to the designated file
-	``` C++
+    - Will execute command, appending the ouput of it to the designated file
+   	``` C++
 	class AppendOutput
 	{
 	public:
